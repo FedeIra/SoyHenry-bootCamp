@@ -10,6 +10,8 @@ function BinarioADecimal(num) {
   return result;
 }
 
+BinarioADecimal("1001011");
+
 function DecimalABinario(num) {
   // tu codigo aca
   let result = "";
@@ -20,3 +22,5 @@ function DecimalABinario(num) {
   }
   return result;
 }
+
+DecimalABinario(54);
