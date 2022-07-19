@@ -328,5 +328,181 @@ console.log(name); // { propiedad: 'mirá, te lo cambié de vuelta' }
 
 /* OPERADORES:
 
-VIDEO: 1:29:53
+Precedencia de operadores y asociatividad: dependiendo el orden de los operadores el resultado que pdoes obtener.
+Arranca primero los parentesis.
+
+
+a ? b : c equivale a if (a) {b} else {c}
+
+typeOf te dice el tipo de dato.
+
+COERCIÓN DE DATOS: es el cambio de un tipo de dato a otro. La aplica directamente y automáticamente JS. 
 */
+
+3 + "3"; // la suma es una concanetación en strings por lo que lo concatena.
+
+"33" - 3; // el menos no está definido para los strings por lo que hace la operación matemática.
+
+"a" - 3; // intenta convertir el a a number por medio de Number("a"), pero devuelve NaN
+
+["3"] * 3; // 9
+
+Number(null); // el número de nada es 0
+
+Number(undefined); //NaN
+
+Number(false); // 0
+Number(true); // 1
+
+10 - true; // 9 pq el pone a true el valor de 1
+
+/* 
+FUNCIONES: first class functions
+Las funciones son objetos por lo que puedo acceder a determinadas particularidades de ellas.
+
+Ejemplo:
+*/
+
+function nombreFuncion() {
+  console.log("Soy una función");
+}
+
+nombreFuncion.name; // nombreFuncion. Esto es una propiedad del objeto función.
+nombreFuncion(); // Soy una función.  también tiene su propio método
+
+/* 
+EXPRESIONES Y STATEMENTS
+
+EXPRESIONES: asignación de variables y operaciones matemáticas.
+STATEMENTS: condicionales, funciones, for, while, etc. Aquellos que estemos generando e invocando.
+
+Es importante para entender lo que hace el scope de algo.
+*/
+
+var saludo = function soyUnStatement() {
+  return "pareciera una variable, pero soy un statement";
+};
+
+/* Aunque lo metas como una variable a saludo, en la práctica es una función por lo que esto es un statement */
+
+/* 
+VALOR Y REFERENCIA: los datos se pasan por referencia o valor.
+
+REFERENCIA: observa una posición de memoria.
+Normalmente cuando definimos un objeto a lo que estamos apuntando es a la posición de memoria de dicho objeto.
+
+Cuando pasas un valor por referencia este valor cambia para todos los contextos que acceden a ese valor. 
+
+VALOR: En cambio, cuando paso el valor (no así la referencia), se genera una nueva cajita y lo mira el solo (solo el que lo modifica) entonces lo impacta solo a él y no al resto de los contextos que acceden a ese valor.
+*/
+
+var a = 1;
+var b = 2;
+
+a = b; // 2 acá se hace el pasaje por valor
+b = 1; // 1
+
+var a;
+var b = { nombre: "martina" }; // b miraba a este objeto
+
+a = b; // ya no le estoy pasando el valor. Le estoy pasando la referencia. Cuando hablamos de objetos pasamos la posición de memoria. Le estás diciendo ahora a a que también mire el objeto que miraba b
+
+b.nombre = "foo";
+
+console.log(a.nombre); // tanto a como b están mirando al objeto y por lo tanto leen el objeto modificado a foo.
+
+/* Los objetos se pasan por referencia mientras que las variables por valor */
+
+var objeto = {
+  propiedad: "me pasan por referencia",
+}; /* Por referencia se almacena el objeto en un espacio de memoria y las referencias pueden verla desde fuera. */
+
+var b =
+  "soy solo una variable, me pasan por valor"; /* Por valor se almacena directamente la variable con su valor en el espacio de memoria */
+
+/* 
+THIS
+En chrome nuestro contexto global es chrome. Si guardo variables se guardan en este contexto en principio.
+*/
+
+this.a =
+  "hola"; /* Como está en global this hace referencia a window (el contexto global). Genera una variable a en el global */
+
+/* window.a */ // en la consola de chrome te imprime "hola"
+
+function f1() {
+  /* This hace referencia al contexto propio de esa función */
+  return this;
+}
+
+/* f1() === window; */ // te devuelve true en chrome
+
+typeof this; // object (globalThis)
+
+var varGlobal = { prop: 37 };
+
+function loguea() {
+  return this.prop;
+} /* No está asociada a nadie */
+
+loguea(); //undefined
+
+function logueaGlobal() {
+  return this;
+}
+
+logueaGlobal(); // te imprime el this global
+
+console.log(this);
+
+function loguea() {
+  return this.prop;
+} /* No está asociada a nadie */
+
+loguea(); //undefined
+
+function logueaGlobal() {
+  return this;
+}
+
+logueaGlobal(); // te imprime el this global
+
+console.log(this);
+
+var obj = {
+  nombre: "Objeto",
+  log: function () {
+    this.nombre = "Cambiado"; // this se refiere a este objeto, a `obj`
+    console.log(this); // obj
+
+    var that = this; // Guardo la referencia a this. Es una variable que mira también a la cajita de this. Solo con var funciona pq el let estaría fuera del contexto de la función.
+
+    var cambia = function (str) {
+      that.nombre = str; // Uso la referencia dentro de esta funcion. Ahora puede modificar a obj.nombre
+    };
+
+    cambia("Hoola!!");
+    console.log(this);
+  },
+};
+
+/* 
+EVENT LOOP:
+JS es singlethreada, única línea de ejecución. Se trabaja todo en pilas. Reserva la función timeout en lo que sería un ayudante web apis.
+
+Se sigue ejecutando la ejecución.
+
+Se saca del stack la función entonces lo delega avanzando con el resto de las tareas para ejecutarlo luego. "Vos función que vas a tardar te delego." Sigo ejecutando el resto del programa.
+
+
+*/
+
+function saludarMasTarde() {
+  var saludo = "Hola";
+  setTimeout(function () {
+    console.log(saludo);
+  }, 3000);
+  console.log("chau");
+}
+
+saludarMasTarde();
