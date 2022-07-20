@@ -4,7 +4,7 @@
 
 function counter() {
   /*
-  Ejercicio 1
+  Ejercicio 1: //contador en el cual cada vez que ejecuten la función counter se genera un nuevo contador y aumenta en 1 el valor. Cada contador es independiente. Hay que usar closure.//
 
   La función counter debe retornar otra función. Esta función retornada debe actuar como un contador, retornando un valor numérico que empieza en 1 e incrementa con cada invocación.
 
@@ -23,7 +23,7 @@ function counter() {
 
 function cacheFunction(cb) {
   /*
-  Ejercicio 2
+  Ejercicio 2: //la memoria cache guarda en algún lado las cosas previas que busqué. Nos ahorra de hacer un procesamiento costoso si ya lo hicimos previamente. Si vuelvo a invocar una función con mismo parametro que directamente me devuelva el resultado y no haga toda la función. El cb se refiere a callback es decir recibe de parámetro una función que todavóa no sé qué hace//
 
   Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback que recibe por parámetro (cb); es decir, que "recuerde" el resultado de cada operación que hace, de manera que, al realizar una operación por segunda vez, se pueda obtener el resultado de esa "memoria" sin tener que efectuar otra vez cálculos que ya se hicieron anteriormente.
 
