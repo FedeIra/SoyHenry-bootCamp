@@ -19,25 +19,12 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
-  var totalValue = 1;
+  var totalValue = 0;
   return function addOne() {
     totalValue++;
     return totalValue;
   };
 }
-
-const secondCounter = counter();
-
-secondCounter(); // 2
-secondCounter(); // 3
-secondCounter(); // 4
-secondCounter(); // 5
-
-const otherCounter = counter();
-otherCounter(); // 2
-otherCounter(); // 3
-otherCounter(); // 4
-otherCounter(); // 5
 
 function cacheFunction(cb) {
   /*
@@ -60,12 +47,15 @@ function cacheFunction(cb) {
 
   */
 
-  // Paso 1: ejecutar el callback y que se guarde en la función ese resultado.
-  cb();
+  var obj = {};
 
-  // Paso 2: retornar una función que acepte como argumento (arg) e invocar a cb con ese argumento. Ese
-  return function summonCB(arg) {
-    cb(arg);
+  return function (arg) {
+    if (obj.hasOwnProperty(arg)) {
+      return obj[arg];
+    } else {
+      obj[arg] = cb(arg);
+      return obj[arg];
+    }
   };
 }
 
@@ -96,9 +86,6 @@ function getNombre() {
 let getNombreInstructor = getNombre.bind(instructor);
 let getNombreAlumno = getNombre.bind(alumno);
 
-getNombreInstructor(); // Franco
-getNombreAlumno(); // Juan
-
 /*
   Ejercicio 4
   
@@ -112,10 +99,6 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
 let textoAsteriscos = crearCadena.bind(this, "*", "*");
 let textoGuiones = crearCadena.bind(this, "-", "-");
 let textoUnderscore = crearCadena.bind(this, "_", "_");
-
-textoAsteriscos("First try"); // *First try*
-textoGuiones("Second try"); // -Second try-
-textoUnderscore("Third try"); // _Third try_
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
