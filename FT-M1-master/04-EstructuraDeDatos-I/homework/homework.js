@@ -29,7 +29,7 @@ function nFactorial(n) {
 function nFibonacci(n) {
   return n === 0 ? 0 : n === 1 ? 1 : nFibonacci(n - 1) + nFibonacci(n - 2);
 }
-/*NOTA AGREGADA EL PRE REPASO: FIBONACCI: 
+/*NOTA AGREGADA POR MI: FIBONACCI: 
 secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 (21+34), 89 (34+55), 144 (55+89)
 Tiene dos casos bases en los cuales:
 f(0) = 0  es decir, la función evaluada con el parametro 0 te da 0
@@ -74,7 +74,7 @@ function Queue() {
 
 /* Queue(); */
 
-/*NOTA AGREGADA EN EL PRE REPASO: completar función constructora Queue, meterle los métodos dentro de queue y en cada uno meterle la lógica para sacar, eliminar y te lea el size. Acordarse de revisar los tests.  */
+/*NOTA AGREGADA POR MI: completar función constructora Queue, meterle los métodos dentro de queue y en cada uno meterle la lógica para sacar, eliminar y te lea el size. Acordarse de revisar los tests.  */
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
