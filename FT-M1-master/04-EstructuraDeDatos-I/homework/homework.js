@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /*
 Definir las funciones recursivas nFactorial y nFibonacci.
@@ -14,11 +14,19 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
-function nFactorial(n) {
-}
+function nFactorial(n) {}
 
-function nFibonacci(n) {
-}
+function nFibonacci(n) {}
+/*NOTA AGREGADA EL PRE REPASO: FIBONACCI: 
+secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 (21+34), 89 (34+55), 144 (55+89)
+Tiene dos casos bases en los cuales:
+f(0) = 0  es decir, la función evaluada con el parametro 0 te da 0
+f(1) = 1  lo mismo que antes
+f(n) = f(n-2) + f(n-1)  Es decir, a partir de f(2), el tercero se calcula como la suma de los dos anteriores. En realidad, esto aplicaría también para f(0) y f(1).
+A partir de forma recursiva, poniendote una posición como n, debería calcularte el f(n) usando recursividad.
+
+
+*/
 
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
@@ -29,15 +37,13 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 Pueden utilizar class o función constructora.
 */
 
-function Queue() {
-
-}
-
+function Queue() {}
+/*NOTA AGREGADA EN EL PRE REPASO: completar función constructora Queue, meterle los métodos dentro de queue y en cada uno meterle la lógica para sacar, eliminar y te lea el size. Acordarse de revisar los tests.  */
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
 module.exports = {
   Queue,
   nFactorial,
-  nFibonacci
+  nFibonacci,
 };
