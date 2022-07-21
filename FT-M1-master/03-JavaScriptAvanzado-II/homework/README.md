@@ -68,6 +68,69 @@ Probá tu solución con el siguiente código:
 // 6
 > t.getType();
 // "Triangle"
+
+
+// SHAPES
+
+class shape {
+  constructor(type) {
+    this.type = type;
+  }
+
+  getType() {
+    return this.type;
+  }
+
+  getPerimeter() {
+    if (this.type === 'Triangle') {
+      return this.a + this.b + this.c;
+    }
+    if (this.type === 'Circle') {
+      return 2 * 3.14 * this.radio;
+    }
+    if (this.type === 'Square') {
+      return this.lado * 4;
+    }
+  }
+
+  getArea() {
+    if (this.type === 'Circle') {
+      return 3.14 * this.radio  2
+    }
+    if (this.type === 'Triangle') {
+      return (this.a * this.b) / 2;
+    }
+    if (this.type === 'Square') {
+      return this.lado  2;
+    }
+  }
+
+}
+
+
+class Triangle extends shape {
+  constructor(a,b,c,type='Triangle') {
+    super(type);
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+}
+
+class Circle extends shape {
+  constructor(radio, type='Circle') {
+    super(type);
+    this.radio = radio;
+  }
+}
+
+class Square extends shape {
+  constructor (lado, type = 'Square') {
+    super(type);
+    this.lado = lado;
+  }
+}
+
 ```
 
 - Ahora creá un nuevo constructor que herede de `shape`, llamado `Circle`. Implementalo de tal modo que puedas calcular su perímetro en la función `getPerimeter`.

@@ -18,6 +18,14 @@ function nFactorial(n) {
   return n === 0 ? 1 : n * nFactorial(n - 1);
 }
 
+/* function facto(n) {
+  let prod = 1;
+  for (let i = n; i > 1; i--) {
+    prod *= i;
+  }
+  return prod;
+} */
+
 /* function nFactorial(n) {
   if (n === 0) {
     return 1;
@@ -29,6 +37,18 @@ function nFactorial(n) {
 function nFibonacci(n) {
   return n === 0 ? 0 : n === 1 ? 1 : nFibonacci(n - 1) + nFibonacci(n - 2);
 }
+
+/* function fibo (n){
+    if (n === 0) return 0;
+  else if (n === 1  n === 2)return 1;
+  else {
+    let serie = [0,1,1]
+    for (i=3; i <= (n); i++){
+      serie.push((serie[i-1]+serie[i-2]));
+    }
+    return serie[n];
+  } 
+} */
 /*NOTA AGREGADA POR MI: FIBONACCI: 
 secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 (21+34), 89 (34+55), 144 (55+89)
 Tiene dos casos bases en los cuales:
@@ -50,29 +70,39 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
-  class QueueCreator {
-    constructor(lista) {
-      this.lista = lista;
+  this.lista = [];
+}
+
+Queue.prototype.enqueue = function (value) {
+  return this.lista.push(value);
+};
+
+Queue.prototype.dequeue = function () {
+  return this.lista.length > 0 ? this.lista.shift() : undefined;
+};
+
+Queue.prototype.size = function () {
+  return this.lista.length;
+};
+
+/* function Queue() {
+  class Queue {
+    constructor(lista = []) {
+      return (this.lista = lista);
     }
     enqueue(value) {
-      this.lista.unshift(value);
+      return this.lista.unshift(value);
     }
     dequeue() {
-      if (this.lista.length > 0) {
-        this.lista.splice(0, 1);
-      } else {
-        return undefined;
-      }
+     return this.lista.length > 0 ? this.lista.pop() : undefined;
     }
     size() {
       return this.lista.length;
     }
   }
-
-  let queue = new QueueCreator();
 }
-
-/* Queue(); */
+var queue = new Queue();
+var q2 = new Queue(); */
 
 /*NOTA AGREGADA POR MI: completar función constructora Queue, meterle los métodos dentro de queue y en cada uno meterle la lógica para sacar, eliminar y te lea el size. Acordarse de revisar los tests.  */
 // No modifiquen nada debajo de esta linea
