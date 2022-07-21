@@ -95,6 +95,26 @@ arr[0](); // 3 sale un 3, qué esperaban ustedes??
 arr[1](); // 3
 arr[2](); // 3
 
+// OTRO EJEMPLO:
+
+function counter() {
+  var contador = 0; /* Acá se crea un contexto y se crea la variable. Si creamos la variable adentro de la función return no sería closure pq no está accediendo a un valor fuera de su contexto*/
+  return function addOne() {
+    return ++contador; /* Acá se abre un nuevo contexto el cual puede acceder a la variable contador a través del closure */
+  };
+}
+
+const nuevoContador = counter();
+
+console.log(nuevoContador()); // 1
+console.log(nuevoContador()); // 2
+console.log(nuevoContador()); // 3
+console.log(nuevoContador()); // 4
+
+/* Le pongo al principio el ++ para que el return me lo devuelve con el más uno ya. Otra posibilidad hubiera sido:
+    return contador +=1
+    contador = contador + 1
+    contador ++; */
 // Otro ejemplo:
 
 var creaFuncion = function () {
@@ -226,6 +246,16 @@ console.log(squareCache(10));
 
 console.log(squareCache(2));
 
+// OTRO USO PARA LA FUNCIÓN
+function cacheFunction(cb) {
+  let cache = {};
+  return function (valor) {
+    if (!cache.hasOwnProperty(valor)) {
+      cache[valor] = cb(valor); //{5:10}
+    }
+    return cache[valor];
+  };
+}
 /* 
 BIND: retorna una función
 */
@@ -298,7 +328,13 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
 }
 
 let textoAsteriscos = crearCadena.bind(this, "*", "*");
-let textoGuiones = crearCadena.bind(this, "-", "-");
+let textoGuiones = crearCadena.bind(
+  this,
+  "-",
+  "-"
+); /* Le pasas el this global que en realdiad no es necesario pq ya estamos en global, pero sí es necesario pasarle un primer parámetro al bind. Podríamos ponerle null:
+let textoAsteriscos = crearCadena.bind(null, "*", "*"). Si hubiera un objeto, en lugar de this tendrías que ponerle el nombre del objeto. El this en este caso apuntaba a global que no era necesario; 
+*/
 let textoUnderscore = crearCadena.bind(this, "_", "_");
 
 console.log(textoAsteriscos("First try")); // *First try*

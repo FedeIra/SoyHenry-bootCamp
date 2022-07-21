@@ -14,9 +14,21 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
-function nFactorial(n) {}
+function nFactorial(n) {
+  return n === 0 ? 1 : n * nFactorial(n - 1);
+}
 
-function nFibonacci(n) {}
+/* function nFactorial(n) {
+  if (n === 0) {
+    return 1;
+  } else {
+    return n * nFactorial(n - 1);
+  }
+} */
+
+function nFibonacci(n) {
+  return n === 0 ? 0 : n === 1 ? 1 : nFibonacci(n - 1) + nFibonacci(n - 2);
+}
 /*NOTA AGREGADA EL PRE REPASO: FIBONACCI: 
 secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 (21+34), 89 (34+55), 144 (55+89)
 Tiene dos casos bases en los cuales:
@@ -37,7 +49,31 @@ Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde e
 Pueden utilizar class o función constructora.
 */
 
-function Queue() {}
+function Queue() {
+  class QueueCreator {
+    constructor(lista) {
+      this.lista = lista;
+    }
+    enqueue(value) {
+      this.lista.unshift(value);
+    }
+    dequeue() {
+      if (this.lista.length > 0) {
+        this.lista.splice(0, 1);
+      } else {
+        return undefined;
+      }
+    }
+    size() {
+      return this.lista.length;
+    }
+  }
+
+  let queue = new QueueCreator();
+}
+
+/* Queue(); */
+
 /*NOTA AGREGADA EN EL PRE REPASO: completar función constructora Queue, meterle los métodos dentro de queue y en cada uno meterle la lógica para sacar, eliminar y te lea el size. Acordarse de revisar los tests.  */
 // No modifiquen nada debajo de esta linea
 // --------------------------------

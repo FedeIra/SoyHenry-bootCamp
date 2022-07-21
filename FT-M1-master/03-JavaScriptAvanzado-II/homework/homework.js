@@ -51,6 +51,7 @@ function cacheFunction(cb) {
 
   return function (arg) {
     if (obj.hasOwnProperty(arg)) {
+      /* Otra posibilidad hubiera sido: arg in cache (el IN para OBJETOS) */
       return obj[arg];
     } else {
       obj[arg] = cb(arg);
@@ -96,7 +97,13 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos = crearCadena.bind(this, "*", "*");
+let textoAsteriscos = crearCadena.bind(
+  this,
+  "*",
+  "*"
+); /* Le pasas el this global que en realdiad no es necesario pq ya estamos en global, pero sí es necesario pasarle un primer parámetro al bind. Podríamos ponerle null:
+let textoAsteriscos = crearCadena.bind(null, "*", "*"); 
+*/
 let textoGuiones = crearCadena.bind(this, "-", "-");
 let textoUnderscore = crearCadena.bind(this, "_", "_");
 
