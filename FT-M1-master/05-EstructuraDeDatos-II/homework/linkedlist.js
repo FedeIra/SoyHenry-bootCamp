@@ -1,5 +1,4 @@
-const { isNull } = require("util");
-
+// AGREGARLE UN METODO QUE ELIMINE UN NODO ESPECIFICO POR POSICION
 function Node(value) {
   this.value = value;
   this.next = null;
