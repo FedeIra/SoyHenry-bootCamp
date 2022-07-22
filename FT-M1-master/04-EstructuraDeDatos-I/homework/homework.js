@@ -18,25 +18,63 @@ function nFactorial(n) {
   return n === 0 ? 1 : n * nFactorial(n - 1);
 }
 
-/* function facto(n) {
+// Otra solución:
+
+function factorial(n) {
+  // caso base --> si num mayor a 1 o menos a 2 ==> retornamos 1
+  console.log("una vez más, entré");
+  if (n > -1 && n < 2) {
+    console.log("retorno 1");
+    return 1; /* Cuando llega al 1 vuelve para atrás */
+  } else if (n < 0) return 0;
+  else {
+    return n * nFactorial(n - 1);
+  }
+  // caso base --> si num es menor a 0 => retornamos 0
+}
+
+// => !5 = 5 * !4
+// => !N = !N (N-1)
+
+function facto(n) {
   let prod = 1;
   for (let i = n; i > 1; i--) {
     prod *= i;
   }
   return prod;
-} */
+}
 
-/* function nFactorial(n) {
+function nFactorial(n) {
   if (n === 0) {
     return 1;
   } else {
     return n * nFactorial(n - 1);
   }
-} */
+}
 
 function nFibonacci(n) {
   return n === 0 ? 0 : n === 1 ? 1 : nFibonacci(n - 1) + nFibonacci(n - 2);
 }
+
+function nFibonacci(n) {
+  if (n < 0) return "error";
+  if (n < 2) return n;
+
+  return nFibonacci(n - 1) + nFibonacci(n - 2);
+}
+
+nFibonacci(5);
+
+// secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55(21 + 34), 89(34 + 55), 144(55 + 89)
+//            n n+1 r  r ...
+// nFibonacci(7) = nFibonacci(6) + nFibonacci(5)
+
+/* Entra en juego un concepto. Hay distintos tipos de programación para llegar a mismo resultado:
+-Programación declarativa: declaro lo que quiero que se haga, como el ejercicio anterior
+-Programación imperativa: le digo lo que quiero que se haga, y cómo quiero que se haga, como en la solución de un for que le digo paso a paso que quiero que haga.
+
+Hay veces que una es mejor y otras la otra.
+*/
 
 /* function fibo (n){
     if (n === 0) return 0;
@@ -48,7 +86,8 @@ function nFibonacci(n) {
     }
     return serie[n];
   } 
-} */
+}  */
+
 /*NOTA AGREGADA POR MI: FIBONACCI: 
 secuencia: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 (21+34), 89 (34+55), 144 (55+89)
 Tiene dos casos bases en los cuales:
@@ -70,19 +109,22 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
-  this.lista = [];
+  this.list = [];
 }
 
 Queue.prototype.enqueue = function (value) {
-  return this.lista.push(value);
+  return this.list.push(value);
+  //return this.list.unshift(value);
 };
 
 Queue.prototype.dequeue = function () {
-  return this.lista.length > 0 ? this.lista.shift() : undefined;
+  // return this.list.length > 0 ? this.list.shift() : undefined; NO HACE FALTA LA PARTE DE UNDIFINED PQ AL TENER RETURN TE TIRA UNDIFINED SI NO HABÍA NADA:
+  return this.list.shift();
+  //return this.list.pop();
 };
 
 Queue.prototype.size = function () {
-  return this.lista.length;
+  return this.list.length;
 };
 
 /* function Queue() {

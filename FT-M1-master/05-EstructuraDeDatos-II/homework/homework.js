@@ -28,6 +28,79 @@ function LinkedList() {}
 
 function Node(value) {}
 
+/* function LinkedList() {
+  this.head = null;
+}
+
+function Node(data) {
+  this.data = data;
+  this.next = null;
+}
+
+LinkedList.prototype.add = function (element) {
+  let newNode = new Node(element), // valor a nodo
+    currentNode = this.head; // var que apunta al principio de la lista
+
+  if (!currentNode) {
+    //si no hay primer nodo, se le asigna newNode
+    this.head = newNode;
+    return newNode;
+  } else {
+    while (currentNode.next) {
+      // si hay uno primero, empieza a recorrer la lista por los next hasta el último asignandole al next el new nodo.
+      currentNode = currentNode.next;
+    }
+  }
+  currentNode.next = newNode; // esto es para que el nodo anterior apunte al nuevo y conectar la línea
+  return newNode;
+};
+
+LinkedList.prototype.remove = function () {
+  let currentNode = this.head;
+
+  if (!currentNode) {
+    return "No nodes dude...";
+  } else if (!currentNode.next) {
+    delete this.head;
+    return "head eliminated...";
+  } else {
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+  }
+  delete currentNode;
+  return "node terminated";
+};
+
+LinkedList.prototype.searching = function (valueOrCallback) {
+  let currentNode = this.head;
+  if (!currentNode) {
+    return "No nodes no return...";
+  } else if (currentNode && !currentNode.next) {
+    if (currentNode.data == valueOrCallback) {
+      return this.head;
+    } else {
+      return "only head, no results...";
+    }
+  } else {
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+      if (currentNode == valueOrCallback || valueOrCallback(currentNode)) {
+        return currentNode;
+      }
+    }
+    return "you got nodes but not results...";
+  }
+};
+
+// --------------------------------------------------------------------------
+
+var linkedList = new LinkedList();
+
+linkedList.add("Fede");
+
+linkedList.searching("Fede");
+ */
 /*
 Implementar la clase HashTable.
 
