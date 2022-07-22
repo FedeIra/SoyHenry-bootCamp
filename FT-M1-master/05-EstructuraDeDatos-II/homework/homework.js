@@ -23,84 +23,78 @@ function size6(valor) {
 }
 lista.search(size6); tendría que ejecutar la función en cada uno hasta que devuelva true y haga match. Tenes que chequear si recibís un valor o una función y considerando eso hacer una u otro paso.
 */
-
-function LinkedList() {}
-
-function Node(value) {}
-
-/* function LinkedList() {
-  this.head = null;
+class Node {
+  constructor(value) {
+    this.value = data;
+    this.next = null;
+  }
 }
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+  add(value) {
+    let newNode = new Node(value),
+      currentNode = this.head;
 
-function Node(data) {
-  this.data = data;
-  this.next = null;
-}
+    if (!currentNode) {
+      this.head = newNode;
+      return "nodo añadido";
+    }
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
 
-LinkedList.prototype.add = function (element) {
-  let newNode = new Node(element), // valor a nodo
-    currentNode = this.head; // var que apunta al principio de la lista
-
-  if (!currentNode) {
-    //si no hay primer nodo, se le asigna newNode
-    this.head = newNode;
+    currentNode.next = newNode;
     return newNode;
-  } else {
-    while (currentNode.next) {
-      // si hay uno primero, empieza a recorrer la lista por los next hasta el último asignandole al next el new nodo.
-      currentNode = currentNode.next;
-    }
   }
-  currentNode.next = newNode; // esto es para que el nodo anterior apunte al nuevo y conectar la línea
-  return newNode;
-};
-
-LinkedList.prototype.remove = function () {
-  let currentNode = this.head;
-
-  if (!currentNode) {
-    return "No nodes dude...";
-  } else if (!currentNode.next) {
-    delete this.head;
-    return "head eliminated...";
-  } else {
-    while (currentNode.next) {
-      currentNode = currentNode.next;
+  remove() {
+    let current = this.head; //entras en la lista
+    let deleted = "";
+    if (current === null) {
+      return null; //la lista esta vacia, no puedo  borrar nada devuelvo null
     }
+
+    if (!current.next) {
+      //compruebo que al head no le siga nadie
+      deleted = this.head.value; //guardo el valor en un auxiliar antes de borrarlo
+
+      this.head = null; //borras la cabeza de la lista
+      return deleted;
+    }
+
+    while (current.next.next) {
+      //current es el anteultimo nodo
+      current = current.next;
+    }
+
+    deleted = current.next.value; //guardo valor en auxiliar antes de borrarlo
+    current.next = null; //borro la conexion al ultimo nodo, JS despues se encarga de sacarlo de memoria
+    return deleted;
   }
-  delete currentNode;
-  return "node terminated";
-};
+  search(arg) {
+    let currentNode = this.head;
+    let isCallback = typeof arg === "function" ? true : false;
 
-LinkedList.prototype.searching = function (valueOrCallback) {
-  let currentNode = this.head;
-  if (!currentNode) {
-    return "No nodes no return...";
-  } else if (currentNode && !currentNode.next) {
-    if (currentNode.data == valueOrCallback) {
-      return this.head;
-    } else {
-      return "only head, no results...";
+    if (!currentNode) {
+      return "No node head, no return...";
     }
-  } else {
-    while (currentNode.next) {
-      currentNode = currentNode.next;
-      if (currentNode == valueOrCallback || valueOrCallback(currentNode)) {
-        return currentNode;
+    while (currentNode) {
+      if (!isCallback) {
+        if (current.value === arg) {
+          return current.value;
+        } else {
+          if (arg(current.value)) {
+            return current.value;
+          }
+        }
+        currentNode = current.next;
       }
+      return null;
     }
-    return "you got nodes but not results...";
   }
-};
+}
 
-// --------------------------------------------------------------------------
-
-var linkedList = new LinkedList();
-
-linkedList.add("Fede");
-
-linkedList.searching("Fede");
- */
 /*
 Implementar la clase HashTable.
 
