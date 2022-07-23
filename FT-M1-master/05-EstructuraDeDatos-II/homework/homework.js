@@ -23,75 +23,90 @@ function size6(valor) {
 }
 lista.search(size6); tendría que ejecutar la función en cada uno hasta que devuelva true y haga match. Tenes que chequear si recibís un valor o una función y considerando eso hacer una u otro paso.
 */
-class Node {
-  constructor(value) {
-    this.value = data;
-    this.next = null;
-  }
+function Node(value) {
+  this.value = value;
+  this.next = null;
 }
+
 class LinkedList {
   constructor() {
     this.head = null;
   }
-  add(value) {
-    let newNode = new Node(value),
-      currentNode = this.head;
 
-    if (!currentNode) {
-      this.head = newNode;
+  add(value) {
+    let nodo = new Node(value);
+    let current = this.head;
+
+    if (current === null) {
+      this.head = nodo;
       return "nodo añadido";
     }
-    while (currentNode.next) {
-      currentNode = currentNode.next;
+
+    while (current.next) {
+      current = current.next;
     }
 
-    currentNode.next = newNode;
-    return newNode;
+    current.next = nodo;
+    return "se agrego el nuevo nodo con valor " + nodo.value;
   }
+
   remove() {
-    let current = this.head; //entras en la lista
+    let current = this.head;
     let deleted = "";
     if (current === null) {
-      return null; //la lista esta vacia, no puedo  borrar nada devuelvo null
+      return null;
     }
 
     if (!current.next) {
-      //compruebo que al head no le siga nadie
-      deleted = this.head.value; //guardo el valor en un auxiliar antes de borrarlo
+      deleted = this.head.value;
 
-      this.head = null; //borras la cabeza de la lista
+      this.head = null;
       return deleted;
     }
 
     while (current.next.next) {
-      //current es el anteultimo nodo
       current = current.next;
     }
 
-    deleted = current.next.value; //guardo valor en auxiliar antes de borrarlo
-    current.next = null; //borro la conexion al ultimo nodo, JS despues se encarga de sacarlo de memoria
+    deleted = current.next.value;
+    current.next = null;
     return deleted;
   }
-  search(arg) {
-    let currentNode = this.head;
-    let isCallback = typeof arg === "function" ? true : false;
+  // --------------------------------------
+  search(valueOrFunction) {
+    let current = this.head,
+      callback = typeof valueOrFunction == "function" ? true : false;
 
-    if (!currentNode) {
-      return "No node head, no return...";
-    }
-    while (currentNode) {
-      if (!isCallback) {
-        if (current.value === arg) {
-          return current.value;
-        } else {
-          if (arg(current.value)) {
-            return current.value;
-          }
-        }
-        currentNode = current.next;
-      }
+    if (!current) {
       return null;
     }
+
+    if (!callback) {
+      if (valueOrFunction == current.value) {
+        return current.value;
+      }
+    }
+
+    if (callback) {
+      if (valueOrFunction(current.value) == true) {
+        return current.value;
+      }
+    }
+
+    while (current.next) {
+      current = current.next;
+      if (!callback) {
+        if (valueOrFunction == current.value) {
+          return current.value;
+        }
+      }
+      if (callback) {
+        if (valueOrFunction(current.value) == true) {
+          return current.value;
+        }
+      }
+    }
+    return null;
   }
 }
 

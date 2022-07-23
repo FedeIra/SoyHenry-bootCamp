@@ -146,3 +146,103 @@ Si por el hash guardas dos cosas en un mismo espacio, COLISIONAN. Podes agregarl
 
 Lo podemos solucionar con un objeto generando propiedades para cada uno de los datos. Y a los objetos podemos acceder directamente.
 */
+
+//! Ejercicios con listas simplemente enlazadas:
+
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  add(value) {
+    let nodo = new Node(value);
+    let current = this.head;
+
+    if (current === null) {
+      this.head = nodo;
+      return "nodo añadido";
+    }
+
+    while (current.next) {
+      current = current.next;
+    }
+
+    current.next = nodo;
+    return "se agrego el nuevo nodo con valor " + nodo.value;
+  }
+
+  remove() {
+    let current = this.head;
+    let deleted = "";
+    if (current === null) {
+      return null;
+    }
+
+    if (!current.next) {
+      deleted = this.head.value;
+
+      this.head = null;
+      return deleted;
+    }
+
+    while (current.next.next) {
+      current = current.next;
+    }
+
+    deleted = current.next.value;
+    current.next = null;
+    return deleted;
+  }
+
+  search(valueOrFunction) {
+    let current = this.head,
+      callback = typeof valueOrFunction == "function" ? true : false;
+
+    if (!current) {
+      return null;
+    }
+
+    if (!callback) {
+      if (valueOrFunction == current.value) {
+        return `encontramos el valor en el head: ${current.value}`;
+      }
+    }
+
+    if (callback) {
+      if (valueOrFunction(current.value) == true) {
+        return "el head paso la función y es true";
+      }
+    }
+
+    while (current.next) {
+      current = current.next;
+      if (!callback) {
+        if (valueOrFunction == current.value) {
+          return `encontramos el valor en un nod: ${current.value}`;
+        }
+      }
+      if (callback) {
+        if (valueOrFunction(current.value) == true) {
+          return "el head paso la función y es true";
+        }
+      }
+    }
+    return "tenes, head, tenes nods, pero no matchea el resultado";
+  }
+}
+
+function isEven(arg) {
+  return arg % 2 == 0 ? true : false;
+}
+
+let list1 = new LinkedList();
+
+list1.add("Fede");
+list1.add(3);
+list1.add(6);
+list1.search(isEven);
