@@ -225,3 +225,20 @@ lista.addSpecificNode("Mateo", 1);
 lista.addSpecificNode("Ricardo", 3);
 
 // LISTA: Mateo ---Juan --- Ricardo --- Ignacio ---  Alberto  --- null
+
+// FUNCIÓN PARA ORDENAR NODOS
+LinkedList.prototype.order = function () {
+  let arr = [];
+  let current = this.head;
+  var lista = new LinkedList();
+  if (!current) return null;
+  while (current) {
+    arr.push(current.data);
+    current = current.next;
+  }
+  arr.sort();
+  for (let i = 0; i < arr.length; i++) {
+    lista.add(arr[i]);
+  }
+  console.log(lista);
+};
