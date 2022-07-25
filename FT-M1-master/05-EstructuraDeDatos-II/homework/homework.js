@@ -31,13 +31,14 @@ function Node(value) {
 class LinkedList {
   constructor() {
     this.head = null;
+    // this.length = 0; puedo aregarlo si quiero
   }
 
   add(value) {
     let nodo = new Node(value);
     let current = this.head;
 
-    if (current === null) {
+    if (!current) {
       this.head = nodo;
       return "nodo añadido";
     }
@@ -53,7 +54,7 @@ class LinkedList {
   remove() {
     let current = this.head;
     let deleted = "";
-    if (current === null) {
+    if (!current) {
       return null;
     }
 
@@ -124,7 +125,7 @@ La clase debe tener los siguientes métodos:
 
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
-// FUNCIÓN CREADORA DE LA HASHTABLE
+
 // FUNCIÓN CREADORA DE LA HASHTABLE
 function HashTable() {
   this.numBuckets = 35;

@@ -21,7 +21,7 @@ HashTable.prototype.hash = function (stringInput) {
 //FUNCIÓN SET
 HashTable.prototype.set = function (clave, valor) {
   if (typeof clave !== "string") {
-    return TypeError("Keys must be strings");
+    throw new Error("Keys must be strings");
   }
 
   const index = this.hash(clave);
