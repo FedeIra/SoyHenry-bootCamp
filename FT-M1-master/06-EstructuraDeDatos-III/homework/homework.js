@@ -8,7 +8,7 @@
   - depthFirstForEach: recorre el árbol siguiendo el orden depth first (DFS) en cualquiera de sus variantes, según se indique por parámetro ("post-order", "pre-order", o "in-order"). Nota: si no se provee ningún parámetro, hará el recorrido "in-order" por defecto.
   - breadthFirstForEach: recorre el árbol siguiendo el orden breadth first (BFS)
 
-  El ábrol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
+  El árbol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
 */
 
 function BinarySearchTree() {}
