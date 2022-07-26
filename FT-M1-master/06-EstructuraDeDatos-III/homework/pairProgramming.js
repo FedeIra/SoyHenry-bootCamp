@@ -1,15 +1,5 @@
-"use strict";
+// Lo que hice en el homework, pre programming y post (hasta el codeReview)
 
-/*
-Implementar la clase BinarySearchTree, definiendo los siguientes métodos recursivos:
-  - size: retorna la cantidad total de nodos del árbol
-  - insert: agrega un nodo en el lugar correspondiente
-  - contains: retorna true o false luego de evaluar si cierto valor existe dentro del árbol
-  - depthFirstForEach: recorre el árbol siguiendo el orden depth first (DFS) en cualquiera de sus variantes, según se indique por parámetro ("post-order", "pre-order", o "in-order"). Nota: si no se provee ningún parámetro, hará el recorrido "in-order" por defecto.
-  - breadthFirstForEach: recorre el árbol siguiendo el orden breadth first (BFS)
-
-  El árbol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
-*/
 function BinarySearchTree(data) {
   this.value = data;
   this.left = null;
@@ -103,6 +93,54 @@ BinarySearchTree.prototype.depthFirstForEach = function (
 // FUNCIÓN BREATH FIRST FOR EACH
 BinarySearchTree.prototype.breadthFirstForEach = function () {};
 
+// FUNCIÓN PARA ARMAR ARRAY DE ÁRBOLES IN ORDER (izquierda, root, derecha)
+function dfsRecursiveInOrder(node, testArray) {
+  if (node) {
+    if (node.left) {
+    }
+    dfsRecursiveInOrder(node.left, testArray);
+
+    testArray.push(node.value);
+
+    if (node.right) {
+      dfsRecursiveInOrder(node.right, testArray);
+    }
+  }
+  return testArray;
+}
+
+// INVOCACIÓN
+if (orderDFS === "in-order") {
+  return dfsRecursiveInOrder(this, []);
+}
+
+let tree = new BinarySearchTree(20);
+
+tree.insert(12);
+tree.insert(22);
+tree.insert(15);
+tree.insert(25);
+tree.insert(5);
+tree.insert(17);
+tree.insert(21);
+tree.insert(28);
+tree.insert(0);
+tree.insert(14);
+tree.insert(50);
+tree.insert(1);
+tree.insert(45);
+tree.insert(13);
+tree.insert(12);
+tree.insert(11);
+tree.insert(30);
+tree.insert(35);
+tree.insert(33);
+tree.insert(31);
+tree.insert(34);
+
+console.log(tree.depthFirstForEach("in-order"));
+
+console.log(tree.depthFirstForEach());
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
