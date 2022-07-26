@@ -1,5 +1,10 @@
 "use strict";
 
+// PENSAR LAS SIGUIENTES FUNCIONES:
+// Sumar todos los valores;
+// Sumar solo pares
+
+// PAra listas enlazadas: darlo vuelta.
 /*
 Implementar la clase BinarySearchTree, definiendo los siguientes métodos recursivos:
   - size: retorna la cantidad total de nodos del árbol
@@ -17,7 +22,7 @@ function BinarySearchTree(data) {
   this.__length = 1;
 }
 
-// FUNCIÓN SIZE
+// FUNCIÓN SIZE (lo hice sin recursividad, pero había que hacerlo con.)
 BinarySearchTree.prototype.size = function (data) {
   return this.__length;
 };
@@ -26,7 +31,7 @@ BinarySearchTree.prototype.size = function (data) {
 BinarySearchTree.prototype.insert = function (data) {
   // derecha para mayores
   if (data > this.value) {
-    if (this.right === null) {
+    if (!this.right) {
       this.right = new BinarySearchTree(data);
       this.__length += 1;
       return "se agregó nodo";
@@ -38,7 +43,7 @@ BinarySearchTree.prototype.insert = function (data) {
   }
   //izquierda para menores
   if (data < this.value) {
-    if (this.left === null) {
+    if (!this.left) {
       this.left = new BinarySearchTree(data);
       this.__length += 1;
       return "se agregó nodo";
@@ -101,7 +106,19 @@ BinarySearchTree.prototype.depthFirstForEach = function (
 };
 
 // FUNCIÓN BREATH FIRST FOR EACH
-BinarySearchTree.prototype.breadthFirstForEach = function () {};
+BinarySearchTree.prototype.breadthFirstForEach = function () {
+  if (array == null) {
+    var array = [];
+  }
+  if (this.left) {
+    array.push(this.left);
+  }
+  if (this.right) {
+    array.push(this.right);
+  }
+  callBack(this.value);
+  array.length > 0 && array.shift().breadthFirstForEach(callBack, array);
+};
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
