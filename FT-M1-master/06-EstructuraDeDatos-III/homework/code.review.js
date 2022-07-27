@@ -116,3 +116,8 @@ BinarySearchTree.prototype.breadthFirstForEach = function (
 
 // TAREAS:
 let tree = new BinarySearchTree(20);
+
+tree.insert(22);
+tree.insert(2);
+tree.insert(12);
+tree.insert(6);
