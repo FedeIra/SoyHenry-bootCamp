@@ -26,11 +26,37 @@ Como es una recursión tiene que haber una condición de corte o caso base: nues
 4) Después los concateno de izquierda a derecha (menor a mayor) o viceversa si pusiste mayores a la derecha.
 */
 
+function quickSort(array) {
+  // Implementar el método conocido como quickSort para ordenar de menor a mayor
+  // el array recibido como parámetro
+  // Devolver el array ordenado resultante
+  // Tu código:
+
+  // Caso base:
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array[0],
+    left = [],
+    right = [];
+
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] < pivot) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i]);
+    }
+  }
+  return [...quickSort(left), pivot, ...quickSort(right).flat()];
+}
+
+quickSort([3, 1, 2, 5, 4, 6]); // [1, 2, 3, 4, 5, 6]
+
 /* 
 !MERGE SORT
 
 PASOS:
-1) Divide el conjunto en dos grupos iguales (sin pivot). Da lo mismo que no queden iguales. Se puede dividir con Math.floor(array.length/2). Terminan siendo arrays de un solo elemento.
+1) Divide el conjunto en dos grupos (sin pivot). Da lo mismo que no queden iguales. Se puede dividir con Math.floor(array.length/2). Terminan siendo arrays de un solo elemento.
 2) Ordena recursivamente los dos grupos,
 3) Junta (o mergea) los grupos ordenados. Por cada par de arrays de recorre. Recorre dos arrays al mismo tiempo. Y ese número que estás recorriendo de cada uno de los arrays lo comparas y ves cuál es el menor. El menor lo levantas y levantas el mayor seguido al menor. Lo haces así sucesivamente con cada sub array.
 
