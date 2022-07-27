@@ -7,7 +7,7 @@ function factorear(num) {
   // Ej: factorear(180) --> [1, 2, 2, 3, 3, 5] Ya que 1x2x2x3x3x5 = 180 y son todos números primos
   // Tu código:
   let factor = 2;
-  let factores = [1];
+  let factores = [1]; // se agrega el 1 pq lo pide el test queriendo decir que todo número se divide por 1.
 
   while (num > 1) {
     if (num % factor === 0) {

@@ -115,6 +115,23 @@ console.log(nuevoContador()); // 4
     return contador +=1
     contador = contador + 1
     contador ++; */
+
+// Otro ejemplo:
+
+function exponencial(exp) {
+  return function (params) {
+    return params ** exp;
+  };
+}
+
+let sqrt = exponencial(2);
+let e4 = exponencial(4);
+let e3 = exponencial(3);
+
+sqrt(2); // 4
+sqrt(3); // 9
+sqrt(4); // 16
+
 // Otro ejemplo:
 
 var creaFuncion = function () {
