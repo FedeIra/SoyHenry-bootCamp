@@ -27,7 +27,11 @@ const { Queue, LinkedList, Node, BinarySearchTree } = require("./DS.js");
 // > sqrt(4);
 // < 16
 
-function exponencial(exp) {}
+function exponencial(exp) {
+  return function (params) {
+    return params ** exp;
+  };
+}
 
 // ----- Recursión -----
 
@@ -62,7 +66,17 @@ function exponencial(exp) {}
 // haciendo los movimientos SUR->ESTE->NORTE
 // Aclaraciones: el segundo parametro que recibe la funcion ('direccion') puede ser pasado vacio (null)
 
-function direcciones(laberinto) {}
+function direcciones(laberinto) {
+  if (laberinto[propiedad] == "destino") {
+    return laberinto;
+  }
+
+  for (const propiedad in laberinto) {
+    if (laberinto[propiedad] !== "pared")
+      return direcciones(laberinto[propiedad]);
+  }
+  return propiedad;
+}
 
 // EJERCICIO 3
 // Crea la funcion 'deepEqualArrays':
@@ -185,8 +199,6 @@ OrderedLinkedList.prototype.print = function () {
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
 
-
-
 OrderedLinkedList.prototype.add = function (val) {
   // Creación de nodo
   function Node(value) {
@@ -201,7 +213,8 @@ OrderedLinkedList.prototype.add = function (val) {
     this.head = nodo;
     return "nodo añadido";
   }
-  //Caso 2: tiene solo head
+};
+//Caso 2: tiene solo head
 /*   if (this.head.value < nodo.value)
   {
     let current = this.head; // se para y dice lo que tiene el head (primer nodo de la lista)
@@ -226,10 +239,6 @@ lista.add(5);
 lista.add(6);
 
 lista.print(); */
-
-
-
-
 
 OrderedLinkedList.prototype.removeHigher = function () {};
 
