@@ -32,7 +32,6 @@ function exponencial(exp) {
     return params ** exp;
   };
 }
-
 // ----- Recursión -----
 
 // EJERCICIO 2
@@ -67,20 +66,39 @@ function exponencial(exp) {
 // Aclaraciones: el segundo parametro que recibe la funcion ('direccion') puede ser pasado vacio (null)
 
 function direcciones(laberinto) {
-  if (laberinto[propiedad] == "destino") {
-    return laberinto;
-  }
+  let string = [];
 
   for (const propiedad in laberinto) {
-    if (laberinto[propiedad] !== "pared")
-      return direcciones(laberinto[propiedad]);
+    if (laberinto[propiedad] === "destino") {
+      string.push(propiedad);
+    }
+    if (typeof laberinto[propiedad] == "object") {
+      string.push(propiedad + direcciones(laberinto[propiedad]));
+    }
   }
-  return propiedad;
+  return string.join("");
 }
+
+// Otra solución:
+/* function direcciones(laberinto) {
+  let string = [];
+
+  for (const propiedad in laberinto) {
+    if (laberinto[propiedad] === "destino") {
+      string.push(propiedad);
+    }
+    if (typeof laberinto[propiedad] == "object") {
+      string.push(propiedad + direcciones(laberinto[propiedad]));
+    }
+  }
+  return string.join("");
+}
+
+console.log(direcciones(lab2)); // ESON */
 
 // EJERCICIO 3
 // Crea la funcion 'deepEqualArrays':
-// Dado que las comparaciones en javascript aveces son un problema como con el siguiente ejemplo:
+// Dado que las comparaciones en javascript a veces son un problema como con el siguiente ejemplo:
 // [0,1,2] === [0,1,2] => false // puede probarlo en la consola
 // con objetos o arrays identicos surge la necesidad de comparar en 'profundidad' arrays u objetos
 // en este caso la funcion solo va a ser pensada para recibir arrays,
@@ -91,10 +109,37 @@ function direcciones(laberinto) {
 // deepEqualArrays([0,1,2], [0,1,2,3]) => false
 // deepEqualArrays([0,1,[[0,1,2],1,2]], [0,1,[[0,1,2],1,2]]) => true
 
-function deepEqualArrays(arr1, arr2) {}
+/* function deepEqualArrays(arr1, arr2) {
+  if (arr1.length != arr2.length) {
+    return false;
+  }
+  for (let i = 0; i < arr1.length; i++) {
+    if (typeof arr1[i] == "object" && typeof arr2[i] == "object") {
+      return deepEqualArrays(arr1[i], arr2[i]);
+    }
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+  return true;
+} */
+
+function deepEqualArrays(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+  arr1 = arr1.flat(Infinity);
+  arr2 = arr2.flat(Infinity);
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 // ----- LinkedList -----
-
 // Deben completar la siguiente implementacion 'OrderedLinkedList'(OLL)
 // que es muy similar a las LinkedList vistas en clase solo que
 // los metodos son distintos y deben de estar pensados para conservar la lista
