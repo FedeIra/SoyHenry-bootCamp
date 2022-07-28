@@ -204,25 +204,34 @@ class linkedList {
   }
 }
 
+// PARA ORDENAR LA LISTA DE MAYOR A MENOR
+LinkedList.prototype.orderList = function () {
+  let swap = true;
+
+  let current = this.head;
+
+  while (swap) {
+    while (current.next) {
+      swap = false;
+      if (current.value > current.next.value) {
+        swap = true;
+
+        let aux = current.value;
+
+        current.value = current.next.value;
+
+        current.next.value = aux;
+      }
+    }
+  }
+};
+
 let lista = new linkedList();
 
-lista.add("Fede");
-lista.add("Nacho");
-lista.add("Emi");
-lista.add("Turop");
-lista.remove();
-lista.addSpecificNode("Juan", 1);
-lista.removeSpecificNode("Nacho");
-lista.add("Lautaro");
-lista.addSpecificNode("Romeo", 4);
-lista.remove();
-lista.removeSpecificNode("Emi");
-lista.remove();
-lista.add("Alberto");
-lista.addSpecificNode("Ignacio", 2);
-lista.removeSpecificNode("Fede");
-lista.addSpecificNode("Mateo", 1);
-lista.addSpecificNode("Ricardo", 3);
+lista.add(2);
+lista.add(4);
+lista.add(1);
+lista.add(3);
 
 // LISTA: Mateo ---Juan --- Ricardo --- Ignacio ---  Alberto  --- null
 

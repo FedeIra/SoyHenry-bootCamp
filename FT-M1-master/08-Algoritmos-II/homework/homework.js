@@ -6,6 +6,7 @@ function quickSort(array) {
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
   // Tu código:
+
   if (array.length <= 1) {
     return array;
   }
@@ -15,6 +16,26 @@ function quickSort(array) {
 
   for (let i = 1; i < array.length; i++) {
     if (array[i] < pivot) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i]);
+    }
+  }
+  return [...quickSort(left), pivot, ...quickSort(right).flat()];
+}
+
+// QUICKSORT AL REVÉS:
+
+function quickSort(array) {
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array[0],
+    left = [],
+    right = [];
+
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] > pivot) {
       left.push(array[i]);
     } else {
       right.push(array[i]);
