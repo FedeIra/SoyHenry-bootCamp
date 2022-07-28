@@ -8,8 +8,6 @@
 // Pero todos los métodos ya implementados en las homeowrks no es
 // necesario que los vuelvan a definir.
 
-const { Queue, LinkedList, Node, BinarySearchTree } = require("./DS.js");
-
 // ----- Closures -----
 
 // EJERCICIO 1
@@ -81,17 +79,17 @@ function direcciones(laberinto) {
 
 // Otra solución:
 /* function direcciones(laberinto) {
-  let string = [];
+  let array = [];
 
   for (const propiedad in laberinto) {
     if (laberinto[propiedad] === "destino") {
-      string.push(propiedad);
+      array.push(propiedad);
     }
     if (typeof laberinto[propiedad] == "object") {
-      string.push(propiedad + direcciones(laberinto[propiedad]));
+      array.push(propiedad + direcciones(laberinto[propiedad]));
     }
   }
-  return string.join("");
+  return array.join("");
 }
 
 console.log(direcciones(lab2)); // ESON */
@@ -182,7 +180,50 @@ OrderedLinkedList.prototype.print = function () {
 // > LL.print()
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
-OrderedLinkedList.prototype.add = function (val) {};
+OrderedLinkedList.prototype.add = function (val) {
+  let node = new Node(val);
+
+  // Caso de q no tenga head:
+  if (!this.head) {
+    this.head = node;
+    return "se agregó head";
+  }
+
+  // Caso de solo head y valor mayor
+  if (this.head && node.value >= this.head.value) {
+    let lowerNodeHead = this.head;
+    this.head = node;
+    this.head.next = lowerNodeHead;
+    return "se agregó nodo y cambió head";
+  }
+
+  /*   // caso de solo head y valor menor
+    if (!this.head.next) {
+      this.head.next = node;
+      return "Se agregó el node";
+    } */
+
+  tree.print(); //
+
+  // Caso de head, otros nodes y valor mayor
+
+  // Está fallando cuando entre un valor mayor al último
+  let current = this.head;
+
+  while (current.next) {
+    if (node.value > current.value) {
+      let lowerNode = current;
+      current = node;
+      current.next = lowerNode;
+      return "nodo agregado e intercambio de nodo";
+    } else {
+      current = current.next;
+    }
+  }
+  if (!current.next) {
+    current.next = node;
+  }
+};
 
 // EJERCICIO 5
 // Crea el metodo 'removeHigher' que deve devolver el valor mas alto de la linked list
@@ -198,92 +239,6 @@ OrderedLinkedList.prototype.add = function (val) {};
 // < 1
 // > LL.removeHigher()
 // < null
-
-// ----- LinkedList -----
-
-// Deben completar la siguiente implementacion 'OrderedLinkedList'(OLL)
-// que es muy similar a las LinkedList vistas en clase solo que
-// los metodos son distintos y deben de estar pensados para conservar la lista
-// ordenada de mayor a menor.
-// ejemplos:
-// head --> 5 --> 3 --> 2 --> null
-// head --> 4 --> 3 --> 1 --> null
-// head --> 9 --> 3 --> -1 --> null
-// Las dos clases principales ya van a estar implementadas a continuacion:
-function OrderedLinkedList() {
-  this.head = null;
-}
-// notar que Node esta implementado en el archivo DS
-
-// Y el metodo print que permite visualizar la lista:
-OrderedLinkedList.prototype.print = function () {
-  let print = "head";
-  let pointer = this.head;
-  while (pointer) {
-    print += " --> " + pointer.value;
-    pointer = pointer.next;
-  }
-  print += " --> null";
-  return print;
-};
-
-// EJERCICIO 4
-// Crea el metodo 'add' que debe agregar nodos a la OLL de forma que la misma se conserve ordenada:
-// Ejemplo:
-// > LL.print()
-// < 'head --> null'
-// > LL.add(1)
-// > LL.print()
-// < 'head --> 1 --> null'
-//    2       c
-// > LL.add(5)
-// > LL.print()
-// < 'head --> 5 --> 1 --> null'
-// > LL.add(4)
-// > LL.print()
-// < 'head --> 5 --> 3 --> 1 --> null'
-//               4
-
-OrderedLinkedList.prototype.add = function (val) {
-  // Creación de nodo
-  function Node(value) {
-    this.value = value;
-    this.next = null;
-  }
-
-  let nodo = new Node(val);
-
-  //Caso 1: no tiene head
-  if (!this.head) {
-    this.head = nodo;
-    return "nodo añadido";
-  }
-};
-//Caso 2: tiene solo head
-/*   if (this.head.value < nodo.value)
-  {
-    let current = this.head; // se para y dice lo que tiene el head (primer nodo de la lista)
-
-    // Caso 3: Si el siguiente valor del nodo es menor al valor del nodo actual, entonces le pedimos al nodo anterior que apunte a este y este nodo apunta al siguiente cuyo valor de nodo era menor.
-    if (current.next.next.value < nodo.value) {
-      current.next = nodo
-    }
-
-    while (current.next) {
-      current = current.next;
-    }
-  }
-  // cuando el while termina sigo acá debajo
-  current.next = nodo;
-  return "se agrego el nuevo nodo con valor " + nodo.value;
-};
-
-
-let lista = new OrderedLinkedList();
-lista.add(5);
-lista.add(6);
-
-lista.print(); */
 
 OrderedLinkedList.prototype.removeHigher = function () {};
 
@@ -377,14 +332,44 @@ BinarySearchTree.prototype.toArray = function () {
 // Si bien esta no es la mejor implementacion existente, con que uds puedan
 // informarse sobre algoritmos, leerlos de un pseudocodigo e implemnterlos alcanzara
 
-function primalityTest(n) {}
+function primalityTest(n) {
+  if (n == 2 || n == 3) {
+    return true;
+  } else if (n <= 1 || n % 2 == 0 || n % 3 == 0) {
+    return false;
+  } else {
+    for (let i = 5; i * i <= n; i += 6) {
+      // de este modo chequeo si es primo cada 5 números en lugar de cada 1 (considerando que el número va a ser mayor a 3, y que 4 cae dentro del segundo if. Es decir, arrancas la formula desde el tercer número primo, 5)
+      if (n % i == 0 || n % (i + 2) == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
 
 // EJERCICIO 10
 // Implementa el algoritmo conocido como 'quickSort', que dado un arreglo de elemntos
 // retorn el mismo ordenado de 'mayor a menor!'
 // https://en.wikipedia.org/wiki/Quicksort
 
-function quickSort(array) {}
+function quickSort(array) {
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array[0],
+    left = [],
+    right = [];
+
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] > pivot) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i]);
+    }
+  }
+  return [...quickSort(left), pivot, ...quickSort(right).flat()];
+}
 // QuickSort ya lo conocen solo que este
 // ordena de mayor a menor
 // para esto hay que unir como right+mid+left o cambiar el

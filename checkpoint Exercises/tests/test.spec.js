@@ -172,7 +172,7 @@ describe("Practica del Checkpoint M1", function () {
       expect(ll).to.be.deep.equal(ll2);
     });
     xit("debe agregar nodos a la OrderedLinkedList, antes de los nodos menores al argumento", function () {
-      ll.add(4);
+      ll.add(4); // QUEDE ACÁ
       let ll2 = new OrderedLinkedList();
       ll2.head = new Node(5);
       ll2.head.next = new Node(4);
