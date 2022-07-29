@@ -173,3 +173,33 @@ module.exports = {
   mergeQueues,
   closureMult,
 };
+
+// EJERCICIO DE LOS SIMPSONS
+
+var isAncestor = function (genealogyTree, ancestor, descendant) {
+  // Tu código aca:
+  /* for (let mujer in genealogyTree) {
+    if (mujer === ancestor) {
+      for (let hija of genealogyTree[mujer]) {
+        if (hija === descendant) return true;
+      }
+      for (let hija of genealogyTree[mujer])
+        if (isAncestor(genealogyTree, hija, descendant)) return true;
+    }
+  }
+  return false;
+}; */
+};
+
+var isAncestor = function (genealogyTree, ancestor, descendant) {
+  for (prop in genealogyTree) {
+    if (genealogyTree[prop].includes(descendant) && prop !== ancestor) {
+      isAncestor(genealogyTree, ancestor, prop);
+    }
+
+    if (genealogyTree[prop].includes(descendant) && prop === ancestor) {
+      return true;
+    }
+    return false;
+  }
+};

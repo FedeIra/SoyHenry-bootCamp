@@ -61,50 +61,6 @@ function Node(valor) {
   this.next = null;
 }
 
-function BinarySearchTree(valor) {
-  this.value = valor;
-  this.left = null;
-  this.right = null;
-}
-
-BinarySearchTree.prototype.insert = function (value) {
-  if (value < this.value) {
-    if (this.left === null) {
-      var newTree = new BinarySearchTree(value);
-      this.left = newTree;
-    } else {
-      this.left.insert(value);
-    }
-  } else {
-    if (this.right === null) {
-      var newTree = new BinarySearchTree(value);
-      this.right = newTree;
-    } else {
-      this.right.insert(value);
-    }
-  }
-};
-
-BinarySearchTree.prototype.size = function () {
-  if (this.value === null) {
-    return 0;
-  }
-
-  if (this.left === null && this.right === null) {
-    return 1;
-  }
-
-  if (this.left === null) {
-    return 1 + this.right.size();
-  }
-
-  if (this.right === null) {
-    return 1 + this.left.size();
-  }
-
-  return 1 + this.left.size() + this.right.size();
-};
-
 // Implementar el método changeNotNumbers dentro del prototype de LinkedList que deberá cambiar
 // aquellos valores que no puedan castearse a numeros por 'Kiricocho' y devolver la cantidad de cambios que hizo
 // Aclaracion: si el valor del nodo puede castearse a número NO hay que reemplazarlo
@@ -140,3 +96,104 @@ LinkedList.prototype.changeNotNumbers = function () {
 
 const lista = new LinkedList();
 lista.changeNotNumbers();
+
+// OTRAS FUNCIONES PARA LISTAS:
+
+// ----- LinkedList -----
+// Deben completar la siguiente implementacion 'OrderedLinkedList'(OLL)
+// que es muy similar a las LinkedList vistas en clase solo que
+// los metodos son distintos y deben de estar pensados para conservar la lista
+// ordenada de mayor a menor.
+// ejemplos:
+// head --> 5 --> 3 --> 2 --> null
+// head --> 4 --> 3 --> 1 --> null
+// head --> 9 --> 3 --> -1 --> null
+// Las dos clases principales ya van a estar implementadas a continuacion:
+function OrderedLinkedList() {
+  this.head = null;
+}
+
+// notar que Node esta implementado en el archivo DS
+function Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
+// Y el metodo print que permite visualizar la lista:
+OrderedLinkedList.prototype.print = function () {
+  let print = "head";
+  let pointer = this.head;
+  while (pointer) {
+    print += " --> " + pointer.value;
+    pointer = pointer.next;
+  }
+  print += " --> null";
+  return print;
+};
+
+// EJERCICIO 4
+// Crea el metodo 'add' que debe agregar nodos a la OLL de forma que la misma se conserve ordenada:
+// Ejemplo:
+// > LL.print()
+// < 'head --> null'
+// > LL.add(1)
+// > LL.print()
+// < 'head --> 1 --> null'
+//    2       c
+// > LL.add(5)
+// > LL.print()
+// < 'head --> 5 --> 1 --> null'
+// > LL.add(4)
+// > LL.print()
+// < 'head --> 5 --> 3 --> 1 --> null'
+//               4
+
+OrderedLinkedList.prototype.insert = function (value) {
+  if (!this.head) {
+    this.head = new Node(value);
+    return "se agregó como head";
+  } else {
+    let cursor = this.head;
+    while (cursor.next) {
+      cursor = cursor.next;
+    }
+    cursor.next = new Node(value);
+    return "se agregó nodo";
+  }
+};
+
+OrderedLinkedList.prototype.toArray = function () {
+  if (this.head === null) return false;
+
+  let current = this.head,
+    arr = [];
+
+  while (current) {
+    arr.push(current.value);
+    current = current.next;
+  }
+  arr.sort((a, b) => (a < b ? 1 : -1));
+
+  this.head = null;
+
+  for (let i = 0; i < arr.length; i++) {
+    this.insert(arr[i]);
+  }
+};
+
+OrderedLinkedList.prototype.add = function (val) {
+  this.insert(val);
+  this.toArray();
+};
+
+let tree = new OrderedLinkedList();
+
+tree.add(2);
+tree.add(3);
+tree.add(5);
+tree.add(6);
+tree.add(15);
+tree.add(9);
+tree.add(10);
+
+tree.print();

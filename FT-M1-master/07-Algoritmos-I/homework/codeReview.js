@@ -43,6 +43,37 @@ function bubbleSort(array) {
 }
 bubbleSort([3, 1, 5, 8, 213]); // [ 1, 3, 5, 8, 213 ]
 
+// ---- Algoritmos ----
+// EJERCICIO 10
+// Ordená un arreglo de objetos usando un bubble sort pero con algunas particularidades.
+// Además del arreglo a ordenar la función va a recibir como parámetro una función
+// que va a retornar 1 sí no hay que ordenarlo y -1 en el caso de que si haya que ordenarlo.
+// Ejemplo:
+// var array = [
+//   {name: 'Cristian', age: 26, height: 1.85},
+//   {name: 'Dylan', age: 30, height: 1.75},
+//   {name: 'Joaquin', age: 25, height: 1.77},
+// ]
+// specialSort(array, swapFunction) --> Retornaría el siguiente array:
+// [
+//   {name: 'Cristian', age: 26, height: 1.77},
+//   {name: 'Joaquin', age: 25, height: 1.85},
+//   {name: 'Dylan', age: 30, height: 1.75},
+// ]
+function specialSort(array, swapFunction) {
+  // Tu código aca:
+  // 1 no cambia, -1 cambia
+
+  for (let j = 0; j < array.length - 1; j++) {
+    for (let i = 0; i < array.length - 1; i++) {
+      if (swapFunction(array[i], array[i + 1]) === -1) {
+        [array[i], array[i + 1]] = [array[i + 1], array[i]];
+      }
+    }
+  }
+  return array;
+}
+
 function insertionSort(array) {
   // Implementar el método conocido como insertionSort para ordenar de menor a mayor
   // el array recibido como parámetro utilizando arreglos

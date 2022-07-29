@@ -180,49 +180,42 @@ OrderedLinkedList.prototype.print = function () {
 // > LL.print()
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
-OrderedLinkedList.prototype.add = function (val) {
-  let node = new Node(val);
-
-  // Caso de q no tenga head:
+OrderedLinkedList.prototype.insert = function (value) {
   if (!this.head) {
-    this.head = node;
-    return "se agregó head";
-  }
-
-  // Caso de solo head y valor mayor
-  if (this.head && node.value >= this.head.value) {
-    let lowerNodeHead = this.head;
-    this.head = node;
-    this.head.next = lowerNodeHead;
-    return "se agregó nodo y cambió head";
-  }
-
-  /*   // caso de solo head y valor menor
-    if (!this.head.next) {
-      this.head.next = node;
-      return "Se agregó el node";
-    } */
-
-  tree.print(); //
-
-  // Caso de head, otros nodes y valor mayor
-
-  // Está fallando cuando entre un valor mayor al último
-  let current = this.head;
-
-  while (current.next) {
-    if (node.value > current.value) {
-      let lowerNode = current;
-      current = node;
-      current.next = lowerNode;
-      return "nodo agregado e intercambio de nodo";
-    } else {
-      current = current.next;
+    this.head = new Node(value);
+    return "se agregó como head";
+  } else {
+    let cursor = this.head;
+    while (cursor.next) {
+      cursor = cursor.next;
     }
+    cursor.next = new Node(value);
+    return "se agregó nodo";
   }
-  if (!current.next) {
-    current.next = node;
+};
+
+OrderedLinkedList.prototype.toArray = function () {
+  if (this.head === null) return false;
+
+  let current = this.head,
+    arr = [];
+
+  while (current) {
+    arr.push(current.value);
+    current = current.next;
   }
+  arr.sort((a, b) => (a < b ? 1 : -1));
+
+  this.head = null;
+
+  for (let i = 0; i < arr.length; i++) {
+    this.insert(arr[i]);
+  }
+};
+
+OrderedLinkedList.prototype.add = function (val) {
+  this.insert(val);
+  this.toArray();
 };
 
 // EJERCICIO 5
@@ -302,21 +295,16 @@ function multiCallbacks(cbs1, cbs2) {}
 // resultado:[5,8,9,32,64]
 
 BinarySearchTree.prototype.toArray = function () {
-  let arr = [];
-  let current = this;
+  let arr = [this.value];
 
-  while (current) {
-    arr.push(current.value);
-    current = current.left;
+  if (this.left) {
+    arr.push(this.left.toArray());
+  }
+  if (this.right) {
+    arr.push(this.right.toArray());
   }
 
-  current = this.right;
-
-  while (current) {
-    arr.push(current.value);
-    current = current.right;
-  }
-  return arr.sort((a, b) => a - b);
+  return arr.flat(Infinity).sort((a, b) => (a > b ? 1 : -1));
 };
 
 // ----- Algoritmos -----

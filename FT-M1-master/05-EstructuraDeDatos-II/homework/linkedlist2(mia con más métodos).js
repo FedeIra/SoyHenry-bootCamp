@@ -251,3 +251,55 @@ LinkedList.prototype.order = function () {
   }
   console.log(lista);
 };
+
+// FUNCIÓN PARA METER NODO DE MAYOR A MENOR
+OrderedLinkedList.prototype.add = function (val) {
+  let previous = "";
+  let current = this.head;
+  let nodo = new Node(val);
+  if (!current) {
+    this.head = new Node(val);
+  }
+
+  while (current) {
+    if (current.value < val) {
+      break;
+    }
+    if (current.value > val) {
+      //estoy en el nodo que va a seguir al nuevo
+      previous = current;
+      current = current.next;
+    }
+  }
+  // < 'head --> 5 --> 3 --> 1 --> null' add(0)
+  //   head-->   5 --> 4 --> 3 --> 1 --> 0   --> null
+  //     current = 3 previous = 5 next --> 4
+  previous.next = nodo;
+  nodo.next = current;
+};
+
+// PARA SACAR REPETIDOS:
+
+LinkedList.prototype.simplifyList = function () {
+  let current = this.head;
+  let arr = [];
+  let setArr = null;
+
+  if (!current) return false;
+  if (!current.next) return current.value;
+
+  while (current) {
+    arr.push(current.value);
+    current = current.next;
+  }
+
+  setArr = new Set(arr);
+  arr = [];
+  setArr.forEach((el) => arr.push(el));
+
+  this.head = null;
+
+  for (let i = 0; i < arr.length; i++) {
+    this.add(arr[i]);
+  }
+};
