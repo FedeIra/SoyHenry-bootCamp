@@ -6,12 +6,7 @@
 // en las homeworks no es necesario que los vuelvan a definir.
 
 //const { isInteractive } = require('jest-util');
-const {
-  Queue,
-  Node,
-  LinkedList,
-  BinarySearchTree
-} = require('./DS.js');
+const { Queue, Node, LinkedList, BinarySearchTree } = require("./DS.js.js.js");
 
 // ----------------------
 
@@ -43,11 +38,9 @@ const {
 // Pista: utilizar typeof para determinar si el valor de una propiedad es un objeto para aplicar
 // allí la recursión
 
-var objContains = function(obj, prop, value){
-    /* Tu codigo aqui */
-
-}
-
+var objContains = function (obj, prop, value) {
+  /* Tu codigo aqui */
+};
 
 // EJERCICIO 2
 // Secuencia inventada: f(n) = (f(n-1) + f(n-2) + f(n-3)) x 2
@@ -68,8 +61,7 @@ var objContains = function(obj, prop, value){
 // Para números negativos de n debe devolver false
 function secuenciaHenry(array, n) {
   // Tu código aca:
-
-} 
+}
 
 // ---------------------
 
@@ -87,10 +79,9 @@ function secuenciaHenry(array, n) {
 //    lista.add(3);
 //    lista.size(); --> 3
 
-LinkedList.prototype.size = function(){
-    /* Tu codigo aqui */
-
-}
+LinkedList.prototype.size = function () {
+  /* Tu codigo aqui */
+};
 
 // EJERCICIO 4
 // Implementar el método addInPos dentro del prototype de LinkedList que deberá agregar un elemento en
@@ -108,10 +99,9 @@ LinkedList.prototype.size = function(){
 //    lista.addInPos(2, 3); --> Debería devolver false ya que no es posible agregar en la posición 2
 //    sin antes tener cargada la posición 0 y 1.
 
-LinkedList.prototype.addInPos = function(pos,value){
-      /* Tu codigo aqui */
-
-}
+LinkedList.prototype.addInPos = function (pos, value) {
+  /* Tu codigo aqui */
+};
 
 // EJERCICIO 5
 // Agregar al prototipo de LinkedList un método reverseLinkedList que invierta el orden de los elementos de la lista.
@@ -123,9 +113,7 @@ LinkedList.prototype.reverseLinkedList = function () {
   // Tu código aca:
 };
 
-
 // ----------------------
-
 
 // ----- QUEUE -----
 
@@ -146,16 +134,13 @@ LinkedList.prototype.reverseLinkedList = function () {
 // - Tener un ticket que corresponda con el evento (prop event de ticket)
 // - Que no haya ingresado ya otra persona al evento con ese mismo número de ticket
 // Finalmente la función debe devolver un arreglo con todos los nombres de las personas que pudieron ingresar
-// Importante!: Aquellas personas que no cumplan con los requisitos para ingresar deben ser removidos de la cola 
+// Importante!: Aquellas personas que no cumplan con los requisitos para ingresar deben ser removidos de la cola
 
-var controlAcces = function(queue, event){
+var controlAcces = function (queue, event) {
   // Tu código aca:
-    
-}
-
+};
 
 // ---------------
-
 
 // ----- BST -----
 
@@ -173,11 +158,9 @@ var controlAcces = function(queue, event){
 //      \
 //       5
 
-var generateBST = function(array){
+var generateBST = function (array) {
   /* Tu codigo aqui */
-
-}
-
+};
 
 // Ejercicio 8
 // Implementar la función searchMin que busque en nuestro arbol binario, el valor minimo.
@@ -191,7 +174,6 @@ var generateBST = function(array){
 //       5
 //  Debería retornarnos 2
 BinarySearchTree.prototype.searchMin = function () {};
-
 
 //----- ALGORITMOS -----
 
@@ -232,11 +214,9 @@ BinarySearchTree.prototype.searchMin = function () {};
 // ]
 // (Siempre el ordenamiento es de menor a mayor sea cual fuera la propiedad indicada para el orden)
 
-
-var specialSort = function(array, firstOrd, secondOrd) {
+var specialSort = function (array, firstOrd, secondOrd) {
   // Tu código aca:
-
-}
+};
 
 // ----- Closures -----
 
@@ -253,13 +233,10 @@ var specialSort = function(array, firstOrd, secondOrd) {
 //    sumaDiez(11); --> Devolverá 21 (Ya que 11 + 10 = 21)
 
 function closureSum(numFijo) {
-    /* Tu codigo aqui */
-
+  /* Tu codigo aqui */
 }
 
 // ------------------- No Cambies nada de aqui abajo ----------------------------
-
-
 
 module.exports = {
   objContains,
@@ -271,4 +248,4 @@ module.exports = {
   BinarySearchTree,
   specialSort,
   closureSum,
-}
+};
