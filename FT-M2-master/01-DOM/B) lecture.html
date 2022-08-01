@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--!DOM:
+Una página web se construye con los siguientes pasos:
+1) DOM:Document object model. Es el doc html. Es una estructura similar a los árboles. Es lo primero que se construye.
+2) CSSOM: es un objeto representando los estilos asociados al DOM. Es una sintaxis para darle estilos a la página web. Es en CASCADA. Se aplican hacia abajo comenzando por los hijos de html. Pero si después al hijo le cambio el estilo se puede hacer e incluso cambiar para los siguientes hijos.
+3) JavaScript: El navegador interpreta el lenguaje JS. JS le da funcionalidad a una página. Javascript bloquea el parseo (parsear es un pasar un tipo de dato a otro) del DOM. O sea para el parseo de lo que se muestra en la pantalla. Por eso cuando agregamos js al html se suele hacer al final. Se puede interactuar especialmente usando el objeto global del navegador que es document que tiene sus propias funciones.
+4) Render Tree: combina el DOM Y CSSOM, que es todo lo que se va a ver en la página web.
+5) Layout: tela sobre la que vamos a pintar. Cuando el navegador calcula o interpreta dónde se va a estar mostrando la página. El navegador tiene que ordenar las cosas conforme la pantalla y sus pixeles. Determina el tamaño del viewport que da el contexto necesario para calcular los estilos que depende de él, ej: porcentaje o vw units. El view port se puede configurar a través del tag meta viewport:
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> Acá te dice que el ancho de la página va a ajustarse al ancho del dispositivo y que va a tener una escala inicial de 1. Se pone dentro de head porque es meta data. Tiene "diseño responsive" que responde al tipo de pantalla.
+6) Painting: se pinta en el layout. El tiempo depende del tamaño del árbol del DOM y los estilos que se le aplican. Ojo con tener mucho html y js. Todo lo que necesitamos mostrar, al final es texto. La idea es tener todo optimizado.
+
+!DOM API: el browser nos da una API para interactuar con el dom usando JS. Nos permite jugar con el contenido del html y css.
+
+  -->
+<html lang="en">
+
+<head>
+
+  <!-- Es un tag de metadata que es info. importante y necesaria, pero no necesariamente aplica y/o quiero ver en la pantalla. -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My first web page</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style type="text/css">
+    div {
+      height: 200px;
+      width: 200px;
+      border: black 1px solid;
+      background: plum;
+    }
+  </style>
+  <!-- Javascript bloquea el parseo (parsear es un pasar un tipo de dato a otro) del DOM. O sea para el parseo de lo que se muestra en la pantalla. -->
+  <script>setTimeout(() => {
+      console.log("hola");
+    }, 3000); /* No se llega a cargar la página por esto! Esto bloquea que se pueda armar por atrás la página. Por eso, por buenas prácticas hay que poner el código JS al final. */
+  </script>
+  <!--!SCRIPT:
+  Te permite ejecutar código javascript. Se puede hacer con este tag.Si lo pongo en el body, me aparece todo. Ejemplo:  -->
+  <script>alert("Esto es una alerta, pero te detengo que aparezca el resto del DOM. No es una buena práctica")</script>
+
+</head>
+
+<body>
+  <h1 class="veintinueve">Contador de ganado</h1>
+  <p>How are you?</p>
+  <!-- Ejemplo de event listener -->
+  <ul>
+    <li>Oveja num 1</li>
+  </ul>
+  <button>Agregar 1 ganado</button>
+
+  <!-- Pero hay otra forma de meter código JS. Importándolo.
+      !IMPORTACIÓN JS:
+      usando el script y poniendo el source. Es decir puedo meter el código js en otro doc separado.-->
+  <script type="text/javascript" src="prueba.js" async defer></script>
+  <!-- Si le decimos que se maneja de forma asíncrona carga todo sin preocuparse porque termine de ejecutarse el código. El defer le dice al navegador que tiene que ser ejecutado este script luego de haberse parseado el doc pero antes de que se ejecute todo el doc. -->
+
+  <!-- !SELECTORES:
+      Nos permiten seleccionar elementos dentro del document (DOM html), seleccionarlos e interactuar con ellos, luego devolviendo el elemento modificado
+    Se puede seleccionar por class, id y tag
+    !QUERY SELECTOR:
+    Retorna el primer elemento que coincida con lo que indicas. Para corregir le podes agregar selectAll.
+    Te permite seleccionar elementos. Ejemplo con clase::
+    const divs = document.getElementsByClassName("divClass")
+    const div = document.getElementsByClassName("divClass")
+-->
+
+  <!--!Elements:
+1) EventTarget: te escucha y si pasa algo se dispara el evento
+Node: interfaz del cual el objeto hereda. Permite que esos objetos sean tratados similarmente.
+Element: representa un elemento HTML  -->
+
+  <!-- !EVENTOS:
+ Ocurre un evento que dispara ciertas acciones. Hay que fijar el evento. Eso en código se conoce como eventos. Un evento ocurre de muchas maneras y se puede identificar para poder decir que cuando el usuario haga una acción eso produce la ejecución de un código que hace algo.
+
+Es una señal de que algo sucedió. Todos los nodos del DOM pueden generar esta señal. Un botón, div, lo que sea.
+
+!Un EVENT LISTENER es el encargado de escuchar por esas señales y hacer algo.
+
+En un div por ejemplo, cuando la persona lo seleccione cambiar el color o su texto. das una señal al hacer el click y ese elemento tiene un evel listener que apenas se hace click dispara el evento enviando el disparador al servidor que devuelve algo.-->
+
+  <div id='uno'>Uno</div>
+  <div id='dos'>Dos</div>
+  <div id='tres'>Tres</div>
+  <button id="add"> ADD </button>
+
+  <script type="text/javascript">
+    var arreglo = [1, 2, 3]
+    var divs = document.querySelectorAll('div');
+    var div = document.getElementById('uno');
+
+    document.body.addEventListener("click", function (e) {
+      console.log("asd" + e);
+      console.log(e.target);
+    }) /* Acá tenes un event listener. El e es el evento. Dentro de ese evento accede al target. El target es el elemento*/
+
+  </script>
+
+</body>
+
+</html>

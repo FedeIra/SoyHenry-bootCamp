@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Etiqueta de apertura que genera el nodo padre. Como si fuera un árbol. -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- El view port es la parte de la pantalla que se ve. Es solo una parte del navegador. El layout es como están acomodados mis elementos. Puedo especificar un tamaño. Por ejemplo si tengo un monitor de tantos pixeles, le digo en esta parte que se acomodo o vea de tal forma. -->
+  <title>Demo1</title>
+  <link rel="stylesheet" href="">
+  <!-- El éstilo se aplica en cascada de padres a hijos. Esto no significa que puedas cambiarle el éstilo al siguiente hijo -->
+  <!--   <script>alert("Hola mundo")</script> --> -->
+  <!--! Primero se ejecuta el js al estar ya en el head al comienzo de todo. Hay que solucionar esto. Por eso no son buenos los scripts así tal como está. Bloquea el parseo del DOM. PAra empezar hay que ponerlo en el body como buena práctica. -->
+  <style type="text/css">
+    div {
+      height: 200px;
+      width: 200px;
+      border: black 1px solid;
+      background: plum;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='uno'>Uno</div>
+  <div id='dos'>Dos</div>
+  <div id='tres'>Tres</div>
+  <button id="add"> ADD </button>
+  <!-- En el render tree está los elementos que se ven en pantalla. No incluye el head o aquellos elementos que tengan display none. -->
+  <!-- <h1> DOM -->
+  <!-- <script>alert("hola mundo")</script> -->
+  <!-- </h1> -->
+  <!-- PAINTING: dice que elementos se pixan de cual o tal color. Por pixeles. -->
+
+  <!--! DOM API: application programming interface: es una aplicación externa que te da determinados métodos que hacen cosas por mí.
+  Son como funciones predeterminadas o métodos. Nos da una serie de métodos que podemos utilizarlo sin tener que saber en profundidad que es lo que hace.
+La API del DOM sirve para intercatuar con determinados elementos y hacer determinadas cosas.
+
+Cuando creo un doc html se genera un objeto document. en la consola del navegador. Hay un montón de métodos.-->
+
+  <!-- ! SELECTORES:
+!BY ID
+  var uno = document.getElementById("uno")
+Podes cambiar el valor en la cónsola sin usar html:
+uno.innerTHML = "Fede"  El uno es el identificador (id) que tiene en el doc html.
+uno.style.background = "black"   . Con esto le puedo cambiar el color de fondo a la etiqueta desde la cónsola. 
+
+!BY CLASS
+Se puede obtener los elementos con la clase:
+var varios = document.getElementByClassName("misma")   "misma el clase que tiene el doc html". Básicamente lo que hice acá fue fijarle una variable a una clase que tiene varios elementos en forma de array. A partir de ahí, como tenemos un array podemos hacer lo que queramos.
+
+!BY TAG
+var elementos = document.getElementsByTagName("div"). Con esto agarro los divs del doc html y los meto en una variable elementos.
+
+!QUERY SELECTOR (by id, by class y by tag):
+También podemos acceder a los elementos a través de query selector.
+
+var mydiv = document.querySelector("div")   Acá puedo directamente seleccionar lo que quiera. Con la sintaxiss te trae un elemento. Puedo buscar un div, una clase, id.
+Para buscar id = var mydiv = document.querySelector("#elemento"). Me trae uno solo.
+
+var todos = document.querySelectorAll("div")  . Con este método me trae un arreglo con todos los divs.
+
+var uno = document.querySelector("#uno") Para buscar by ID. Puedo buscar también por class, tag, etc.
+
+var dos = document.querySelector("#dos") Con esto accedo al segundo div con id dos.
+
+
+!ELEMENTS:
+Los elementos html heredan de la clase nodo y la clase nodo de evenTarget.-->
+
+
+  <!-- !EVENTOS: -->
+
+  <!-- El event listener funciona como un event loop. -->
+
+  <script type="text/javascript">
+    var arreglo = [1, 2, 3]
+    var divs = document.querySelectorAll('div');// array de divs
+    var div = document.getElementById('uno'); // div id uno
+
+    // 1ER EJEMPLO:
+
+    /*  for (let i = 0; i < divs.length; i++) {
+          divs[i].addEventListener("click", function (e) {
+          alert("CLICKEASTE: ")
+          console.log(e); // se suele ponerle e pq es e por "evento". E es un objeto pq el evento es un objeto.
+          //TARGET DEL EVENTO: es el div. Hace referencia al elemento html que disparó ese elemento. Es muy importante esto.
+          alert("CLICKEASTE: " + e.target.innerText) // acá le dijo que consolegue clickeaste y a eso concaterla en el objeto evento, propiedad target y que diga el inner text q es lo que tiene escrito.
+        })
+       } */
+
+    // 2DO EJEMPLO:
+    /*   divs.forEach(function (element) {  //en este caso element es cada uno de los divs
+        element.addEventListener('click', function (evento) {
+          if (evento.target.style.background == 'gray') { // si el fondo del estilo del div es gris lo pasa a plum
+            evento.target.style.background = 'plum';
+          } else { //de lo contrario lo pasa a gris
+            evento.target.style.background = 'gray';
+          }
+        })
+      }) */
+
+    // 3ER EJEMPLO:
+    var count = 4
+    document.getElementById("add").addEventListener("click", function (e) { //accedo al elemento "add" que es un boton. Le digo que le aplique una función si le hacen click ejecutando la función. Le dejamos el parámetro aunque no se lo pongamos por buenas prácticas.
+      var nuevoDiv = document.createElement("div") //accedo al objeto document para poder utilizar un método de DOM. Se guarda un div nuevo ahí. Es lo mismo que decirle <div></div>
+      // let checkbox = document.createElement("input"); // Puedo meterle un checkbox si quiero
+      nuevoDiv.setAttribute("class", count) // a este nuevo elemento le aplicamos el set attributo que le decimos que tipo, en este caso class cuyo nombre va a ser count. Esl o equivalente a: <div class = "4"> </div>
+      nuevoDiv.setAttribute("id", "este es tu id") //Acá le seteo un id si quiero. Le puse este es tu ID. Igual es mala práctica asignarle un id a cada cosa.
+      nuevoDiv.innerText = count // Acá le decimos que el texto del div sea 4: <div class = "4"> 4 </div>
+      document.body.appendChild(nuevoDiv) // Al body es el único doc que podemos acceder de esta manera. Le digo que le aplique un método que le agrega un nodo o hijito. Le agrega entonces al final del body del doc html el nuevo div.
+      count++ // incrementa el count
+    })
+
+    // document.body.addEventListener('mousemove', function(e) {
+    //   // div.style.position = 'fixed';
+    //   // div.style.top = e.clientY + 15 +'px';
+    //   // div.style.left = e.clientX + 152+'px';
+
+    // })
+    /*   document.body.addEventListener('click', function (e) {
+        console.log(e.target);
+      }) */
+  </script>
+
+  <!-- Es lo que me indica que algo pasó. Ese algo suele estar relacionado a una acción del usuario, click, etc.
+Un event listener es el encargado de escuchar por esas señales y hacer algo. Le decís que cuando el usuario hace click, ejecuta determinada acción. Ejemplo:
+
+uno.addEventListener("click, function(){alert("clickeaste")}")   Le pongo dos parámetros, el evento y el listener que es la función que se va a ejecutar como callback -->
+</body>
+
+</html>
