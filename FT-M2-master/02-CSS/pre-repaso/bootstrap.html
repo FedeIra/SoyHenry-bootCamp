@@ -1,0 +1,127 @@
+<html>
+
+<head>
+  <!--   !BOOTSTRAP (es un framework CSS). -->
+  <title>DEMO Bootstrap</title>
+  <!-- CSS only: tiene estilos y atributos asignados a cada tipo de elemento. El tema es que si no te anda internet se te corta los estilos. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- Javascript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .ownButton {
+      background-color: green;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .otherButton {
+      color: red;
+    }
+
+    /*!
+     CSS MEDIA QUERIES:  */
+    /*    body {
+      background-color: red;
+    } */
+
+    /* Pantallas de menos de 992 px de ancho. Se toma el ancho del viewport, no el ancho de ventana */
+    /*    @media screen and (max-width: 992px) {
+      body {
+        background-color: white;
+      }
+    } */
+
+    /* Acá le decimos que hasta 992 px es azul (antes cuando era más grande era roja), luego si se sigue achicando negro. Se puede hacer esto mismo, pero en lugar de colores, ocultar elementos, o lo que sea. Se pone todo adentro en media queries. */
+
+    /* media: hay tipos de medio. El más común es el screen. */
+
+    /* Pantallas de menos de 600 px de ancho */
+    /*  @media screen and (max-width: 600px) {
+      body {
+        background-color: black;
+      }
+    } */
+
+    /* Esto también lo hace bootstrap. */
+  </style>
+</head>
+
+<body>
+  <h1>DEMO</h1>
+  <!-- Ejemplo de clase creado por nosotros en nuestro syle arriba: -->
+  <button class="ownButton">own BUTTON</button>
+  <!-- Ejemplo de clase de bootstrap -->
+  <button class="btn btn-success">Bootstrap BUTTON</button>
+  <!-- Si hay algo que no me gusta de bootstrap lo puedo modificar sobrescribiéndose. Agrego una clase a style y le pongo la clase al botón aparte de la de bootstrap. Ejemplo: -->
+  <button class="btn btn-success otherButton">Mixed BUTTON</button>
+
+  <!-- Hasta puedo hacer copy/paste de cualquier framework que te de: https://getbootstrap.com/docs/5.2/components/collapse/ Ejemplo:-->
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          Accordion Item sacado de Bootstrap #1
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin
+          adds
+          the appropriate classes that we use to style each element. These classes control the overall appearance, as
+          well
+          as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our
+          default variables. It's also worth noting that just about any HTML can go within the
+          <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--! BOOTSTRAP GRID -->
+  <!-- Se mantienen el tamaño de las columnas al achiar o agrandar los pixeles gracias a la clase col de bootstrap-->
+  <div class="row">
+    <div style="background-color:green ;" class="col">
+      Column
+    </div>
+    <div style="background-color:red ;" class="col">
+      Column
+    </div>
+    <div style="background-color:yellow ;" class="col">
+      Column
+    </div>
+  </div>
+
+  <br><br><br><br>
+
+  <!-- Aca le aplico un espacio que ocupa cada una por columna (el máximo es 12, sino se pasa para abajo) que cambia según el tamaño o ancho del dispositivo. -->
+  <div class="row">
+    <div style="background-color:green ;" class="col-2 col-md-10 col-lg-6">
+      1
+    </div>
+    <div style="background-color:red ;" class="col-4 col-md-1 col-lg-4">
+      2
+    </div>
+    <div style="background-color:yellow ;" class="col-5 col-md-1 col-lg-2">
+      3
+    </div>
+  </div>
+
+  <!-- ! CSS PREPROCESSORS 
+  A partir de una sintaxis propia y distinta al CSS puro, nos permite usar ciertas cosas que CSS no tenía. Uno es el uso de variables.
+
+!{less}:
+Un preprocesador css Está escrito, se procesa y pasa a CSS: https://lesscss.org/less-preview/  . Acá podes escribir en formato muy similar a java y less te lo traduce a css. Se puede definir atributos con variables. Esta bueno definir variable por este medio para cuando queres cambiar muchos elementos con mismo atributo. En lugar de escribir el atributo en cada uno de ellos, lo definis en una variable. También se pueden usar funciones a través de esto. Podemos también darle estilos.
+
+También nos permite importar archivos:
+
+@import -->
+
+</body>
+
+</html>

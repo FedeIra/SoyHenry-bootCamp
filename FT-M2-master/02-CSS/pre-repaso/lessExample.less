@@ -1,0 +1,110 @@
+/*! CSS PREPROCESSORS
+  A partir de una sintaxis propia y distinta al CSS puro, nos permite usar ciertas cosas que CSS no tenía. Uno es el uso de variables.
+
+!{less}:
+
+1) ESCRIBIR EN LESS
+2) LO COMPILAS EN CSS
+3) QUE EL HTML LO LEA
+
+Es un preprocesador css Está escrito, se procesa y pasa a CSS: https://lesscss.org/less-preview/  . Acá podes escribir en formato muy similar a java y less te lo traduce a css. Se puede definir atributos con variables. Esta bueno definir variable por este medio para cuando queres cambiar muchos elementos con mismo atributo. En lugar de escribir el atributo en cada uno de ellos, lo definis en una variable. También se pueden usar funciones a través de esto. Podemos también darle estilos. */
+
+/* También nos permite importar archivos:
+@import
+
+/* Variables*/
+
+@color-fondo: #f55;
+@width: 10px;
+@height: @width + 10px;
+/* También es posible realizar operaciones sobre las variables */
+
+h1 {
+  background-color: @color-fondo;
+  width: @width;
+  height: @height;
+}
+
+/* Traducido al css esto es lo siguiente::after
+
+h1 {
+  background-color: #F55;
+  width: 10px;
+  height: 20px;
+}
+
+*/
+
+/*! MIXINS */
+.important-text {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.danger {
+  .important-text(); /* Con esto le paso a danger todas las propiedades que tenía el importan-text creado anteriormente. Esto te lo toma el CSS */
+  background-color: red;
+}
+/*En CSS sería lo siguiente:
+.danger {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: red;
+}
+*/
+
+.success {
+  .important-text();
+  background-color: green;
+}
+/* De este modo me ahorro código. Invoco la clase con sus propiedades en lugar de escribir cada uno. */
+
+/* Los mixins pueden recibir parámetros: */
+.bordered(@color; @width: 10px) {
+  /* le puedo setear un valor por defecto incluso */
+  border: @width solid @color;
+}
+
+.myArticle {
+  .bordered(blue, 1px);
+}
+
+/* Es posible indicar el nombre del parámetro al invocar el mixin para evitar tener que respetar un orden en particular */
+
+.myArticle-2 {
+  .bordered(@width: 20px; @color: #33acfe);
+}
+
+/* Traducido a CSS:
+.myArticle {
+  border: 1px solid blue;
+}
+.myArticle2 {
+  border: 20px solid #33acfe;
+}
+*/
+
+/* También se puede lograr algo parecido usando HERENCIAS: */
+
+.button-basic {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report {
+  &:extend(.button-basic);
+  background-color: red;
+}
+
+.button-submit {
+  &:extend(.button-basic);
+  background-color: green;
+  color: white;
+}
+
+/* Es muy similar a lo que hicimos con los mixin. La diferencia es como la traduce el CSS */
