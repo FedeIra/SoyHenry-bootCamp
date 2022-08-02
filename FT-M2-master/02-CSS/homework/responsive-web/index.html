@@ -1,35 +1,41 @@
-<!-- Tenemos que agregar algunas etiquetas html y hacerlos responsive utilizando less. Npm install primero. Seguir los pasos que tira el README. Al trabajar sobre los docs less, se traduce simulateaneamente en un doc css. El html se va a referir al index.css que se encarga de traducir todos los archivos de less que se trasladan a ese único doc. El primer paso es importar todos los archivos less. ejemploL
-
-@import "variables";
-@import mixins.less
-@import...
-
-Esto en el archivo index.less. Importas el resto de los archivos less-->
 <!doctype html>
 
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Música 8D</title>
 
   <link href="https://fonts.googleapis.com/css?family=Russo+One|Ubuntu" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
 
+
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
+
 </head>
 
 <body>
 
   <!-- Código del nav acá -->
+  <div class="navigator">
+    <h1>Música 8D</h1>
+    <nav>
+      <a href="">Inicio</a>
+      <a href="">Sobre Nosotros</a>
+      <a href="">Blog</a>
+      <a href="">Contacto</a>
+      <a href="">Registrarse</a>
+    </nav>
+  </div>
 
   <div class="container home">
 
     <header class="intro">
       <!-- Código de header img acá -->
+      <div class="img-header"><img src="img\main-header.png" alt="foto de header"></div>
 
       <h2>Nueva tecnología</h2>
 

@@ -32,7 +32,9 @@ function ToDo(description) {
 
 // Tu código acá:
 ToDo.prototype.completeToDo = function () {
-  this.complete = true;
+  this.complete =
+    this.complete; /* Con esto al ser un booleano le doy la posibilidad de que pase de complete a todo */
+  //this.complete = true;
 };
 // Agregar dos parámetros a la función 'buildToDo':
 //    1) Un objeto de la clase ToDo
@@ -63,6 +65,7 @@ function buildToDo(todo, index) {
   let toDoText = document.createElement("span");
   toDoText.innerHTML = todo.description;
   toDoText.setAttribute("id", index);
+  //todoText.id = index
   /* toDoText.addEventListener("click", completeToDo); */
   checkbox.addEventListener("click", completeToDo);
   if (todo.complete) toDoText.classList.add("completeText");
