@@ -9,19 +9,14 @@
     p {
       padding: 0 15px;
     }
-  }
-  //Acá le doy estilo a mi image head
-
-  .img-header {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
 
     img {
-      width: 100%;
-      margin: 20px 2.5%;
-      border-radius: 20px;
-      height: 100%;
+      border-radius: 14px;
+      margin-top: 12px;
+
+      @media @phone {
+        width: 98%;
+      }
     }
   }
 
@@ -36,11 +31,10 @@
       border-radius: 20px;
       height: 100%;
     }
+
     @media @phone {
+      .ondas,
       .tecnologia {
-        display: none;
-      }
-      .ondas {
         display: none;
       }
       .auricular {
@@ -62,20 +56,18 @@
   }
 
   .actual {
-    @media @phone {
-      flex-wrap: wrap-reverse;
-      padding: 0%;
-    }
     margin-top: 60px;
     border-top: 1px solid @main-border-color;
     padding: 50px 60px;
     display: flex;
     justify-content: center;
 
+    @media @phone {
+      .flex(column-reverse, center, center);
+      padding: 0;
+    }
+
     .actual-text {
-      @media @phone {
-        width: 90%;
-      }
       width: 50%;
 
       h3 {
@@ -87,36 +79,35 @@
       }
 
       .btn {
-        .buttonMixin(white;#23293b);
-        border-radius: 8px;
-        padding: 10px 15px;
-        text-align: center;
-        font-size: 11px;
-        cursor: pointer;
-        display: inline-block;
+        .btn(white, @btn-bg-color, 10px);
 
-        &:hover + {
-          background-color: rgb(236, 9, 9);
-          color: black;
-        }
         @media @phone {
-          width: 100%;
+          width: 97%;
+          text-align: center;
+          padding: 15px;
         }
+      }
+
+      @media @phone {
+        width: 97%;
+        text-align: center;
+        padding: 15px;
       }
     }
 
     .actual-img {
-      @media @phone {
-        width: 100%;
-      }
-
       width: 46%;
       margin-left: 4%;
 
       img {
-        width: 100%;
+        width: 97%;
         height: auto;
         border-radius: 10px;
+      }
+
+      @media @phone {
+        width: 97%;
+        margin: 1;
       }
     }
   }

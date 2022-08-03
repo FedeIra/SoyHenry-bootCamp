@@ -1,33 +1,39 @@
 // Código de Nav acá
-.navigator {
-  background: @nav-bg;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
 
-h1 {
-  padding: 15px;
-  font-size: 30px;
-  @media @phone {
-    white-space: nowrap;
-  }
-}
+// estilos anidados de LESS
 
 nav {
-  @media @phone {
-    margin-top: 3%;
+  h2 {
+    font-size: 3.2rem;
   }
-  a {
-    text-decoration: none;
-    color: @nav-font;
-    .navigationMixin();
+  padding: 10px;
 
-    @media @phone {
-      display: flex;
+  .flex(column, center, center); // display....
+  background-color: @nav-bg;
+  ul {
+    width: 40%;
+    padding-top: 15px;
 
-      flex-shrink: 1;
+    .flex(row, space-around, center);
+    a {
+      font-size: 15px;
+      color: @nav-font;
+      text-decoration: none;
+      font-family: @nav-font;
     }
   }
 }
+
+/*
+
+NAV {
+
+                          H2
+                          UL {
+                                         LI    LI    LI    LI     LI 
+                            
+
+
+
+
+*/
