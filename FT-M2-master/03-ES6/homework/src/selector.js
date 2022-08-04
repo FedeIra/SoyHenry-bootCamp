@@ -31,7 +31,7 @@ var selectorTypeMatcher = (selector) =>
     ? "id"
     : selector[0] === "."
     ? "class"
-    : selector.includes(".")
+    : selector.includes(".") // otra posibilidad =>  (selector.split(".").length > 1)
     ? "tag.class"
     : "tag";
 
@@ -46,10 +46,11 @@ var matchFunctionMaker = function (selector) {
   var matchFunction;
 
   if (selectorType === "id") {
-    return (matchFunction = (el) => el.id && `#${el.id}` === selector);
+    return (matchFunction = (el) => `#${el.id}` === selector);
   } else if (selectorType === "class") {
     matchFunction = (el) => {
       for (let clase = 0; clase < el.classList.length; clase++) {
+        /* las clases de los elementos están en su propiedad classList */
         if (`.${el.classList[clase]}` === selector) {
           return true;
         }
@@ -58,10 +59,7 @@ var matchFunctionMaker = function (selector) {
     };
   } else if (selectorType === "tag.class") {
     matchFunction = (el) => {
-      let classTag = selector.split("."),
-        tag = classTag[0],
-        clase = classTag[1];
-
+      let [tag, clase] = selector.split(".");
       return (
         matchFunctionMaker(tag)(el) && matchFunctionMaker(`.${clase}`)(el)
       ); /* Es la auto invocación con el parámetro necesario */

@@ -13,16 +13,17 @@
   <button class='boton'>AJAX!</button>
   <script type="text/javascript">
     var index = 1;
-    $('.boton').click(function () {
+    $('.boton').click(function () { // Es el equivalente a lo siguiente: document.querySelector(".button")
       // GET AJAX
       $.get("https://jsonplaceholder.typicode.com/photos/" + index, function (data) {
         // vanilla javascript
-        var img = document.createElement('img');
-        img.src = dataAca.url;
-        var title = document.createElement('h3');
-        title.textContent = dataAca.title;
-        $('#respuesta').append(img);
-        $('#respuesta').append(title);
+        var img = document.createElement('img'); /* te crea la imagen */
+        img.src = data.url; /* te dice que el source de la imagen va a ser la url del dataAca */
+        var title = document.createElement('h3'); // <h3></h3>
+        title.textContent = data.title;// <h3>títuloDelServer</h3>
+        /* Acá utiliza jquery */
+        $('#respuesta').append(img); /* Se refiere al div de arriba con id = respuesta y le agrega la etiqueta imagen. */
+        $('#respuesta').append(title); /* Ahora le agrega al mismo div el título h3 y te queda el div ocn la imagen por un lado y el título. */
         index++;
       });
 
