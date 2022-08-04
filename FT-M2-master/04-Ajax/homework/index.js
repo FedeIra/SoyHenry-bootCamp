@@ -1,19 +1,22 @@
 // LISTA DE NOMBRES:
+
+$("#boton2").click(function () {
+  var lista = $("#lista");
+  lista.empty();
+});
+
 $("#boton").click(function () {
+  var lista = $("#lista");
+  lista.empty();
+
   $.get("http://localhost:5000/amigos/", function (data) {
-    data
-      .map((friend) => friend.name)
-      .forEach((friend) => {
-        let list = document.createElement("li");
-        list.textContent = `${friend}`;
-        $("#lista").append(list);
-      });
+    for (let i = 0; i < data.length; i++) {
+      lista.append(`<li>${data[i].id} - ${data[i].name}</li>`);
+    }
   });
 });
 
 // VER AMIGO:
-var index = document.getElementById("input").value;
-
 $("#search").click(function () {
   $.get(
     "http://localhost:5000/amigos/" + document.getElementById("input").value,
@@ -34,12 +37,12 @@ $("#search").click(function () {
 
 //ELIMINAR AMIGO:
 $("#delete").click(function () {
+  let id = $("#inputDelete").val();
+
   $.ajax({
-    url: `http://localhost:5000/amigos/${
-      document.getElementById("inputDelete").value
-    }`,
+    url: `http://localhost:5000/amigos/${id}`,
     type: "DELETE",
-    success: function (request) {
+    success: function () {
       $("#success").text("friend deleted");
     },
   });
