@@ -1,4 +1,5 @@
-// LISTA DE NOMBRES:
+/* MI CÓDIGO CON MÁS FUNCIONES: */
+//LISTA DE NOMBRES:
 
 $("#boton2").click(function () {
   var lista = $("#lista");
@@ -24,13 +25,6 @@ $("#search").click(function () {
       if ("success") {
         $("#amigo").text(data.name);
       }
-
-      /*  let titleFriend = document.createElement('h3');
-        titleFriend.textContent = data.name;
-        let friendContent = document.createElement('p');
-        friendContent.textContent = `Age: ${data.age}, Email:  ${data.email}`;
-        $('#amigo').append(titleFriend);
-         $('#amigo').append(friendContent); */
     }
   );
 });

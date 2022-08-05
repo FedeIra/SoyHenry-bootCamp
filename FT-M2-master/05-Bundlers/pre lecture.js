@@ -29,6 +29,55 @@ console.log(weekDay.name(weekDay.number("Domingo")));
 
 /* Aunque se importe esta función, y se haga una variable en el otro doc con names, por closure, se va a usar la variables names declarada en el contexto de la función donde nace la función name. Esto lo hacían cuando no había módulos lo que solucionó este tema ya que no se pisaban las variables. */
 
+/* Todo el Javascript del browser se ejecuta en un mismo ambiente, donde el objeto window es el contexto global compartido de cualquier JavaScript corriendo en una sola página web. Cualquier variable que es declarada con la keyword var fuera de el cuerpo de una función (o declarada sin el keyword var en cualquier lado cuando no estamos en strict-mode) se convierte en pares key-value en el objeto window. Si deseas escribir Javascript en archivos separados, escribís el path a tu archivo en un <script> tag, y el browser pide el script de esa dirección y ejecuta ese script en el mismo, ambiente compartido como cada otro script.
+
+Esto significa que si tenemos el siguiente archivo Javascript: */
+
+// fileA.js
+
+var foo = 42;
+
+function bar() {
+  console.log(foo);
+}
+y;
+
+// fileB.js
+
+var baz = 74;
+// Y luego requerimos ambas en un archivo html de esta forma:
+
+{
+  /*
+<script src="/fileA.js"></script>
+<script src="/fileB.js"></script>
+*/
+}
+// Esto significa que fileA.js va a correr primero, seguido por fileB.js. Luego de que ambos archivos corrieron, nuesto objeto window se verá así:
+
+window.foo; // 42
+typeof window.bar; // "function"
+window.baz; // 74
+// Puedes ver como esto puede rápidamente volverse problemático! Miremos a los dos grandes problemas que nos enfrentamos:
+
+/* PROBLEMA UNO: COLISIÓN DE NOMBRES
+Por ejemplo, que pasa si agregamos una fileC.js... */
+
+{
+  /*
+<script src="/fileA.js"></script>
+<script src="/fileB.js"></script>
+<script src="/fileC.js"></script> 
+*/
+}
+
+// ...el cual se ve como esto:
+
+// fileC.js
+
+var foo = "uh oh!"; // We've already declared a variable called "foo" in fileA.js! But we're redefining it here!
+bar(); // this is our bar function from fileA.js!
+
 /* JS empezó a meter formas de trabajar con modulos.>
 !COMMON JS:
 Con la palabra reservada export. Ejemplo:
@@ -149,6 +198,8 @@ Agarra los archivos (entry point) y a partir de ahí los recorre y arma el grafo
 
 !WEBPACK:
 Es un bundler que usa react. Para poder utilizarlo hay que:
+
+Webpack toma nuestros archivos JavaScript y produce un solo, archivo JavaScript transformado. Webpack transpila nuestro Javascript a... Javascript distinto!
 
 1)
 npm init
