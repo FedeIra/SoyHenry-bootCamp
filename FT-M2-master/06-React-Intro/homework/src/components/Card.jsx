@@ -3,22 +3,24 @@ import React from "react";
 function Card({ max, min, name, img, onClose }) {
   // acá va tu código
   return (
-    <div className="contenedor-weather-card">
-      <button className="boton-x" onClick={onClose}>
-        X
-      </button>
-      <div className="nombre-ciudad">{name}</div>
-      <div className="temperaturas">
-        <div>Min</div>
-        <div>Max</div>
+    <div className="card">
+      <div>
+        <button className="boton-x" onClick={onClose}>
+          X
+        </button>
       </div>
-      <div className="grados">
-        <div className="grado-minimo">{Math.floor(min - 273)}°</div>
-        <div className="grado-maximo">{Math.ceil(max - 273)}°</div>
+      <div className="card-title">{name}</div>
+      <div className="card-min">
+        <h5>Min</h5>
+        <span className="card-min">{Math.floor(min - 273)}°</span>
       </div>
-      <div className="contenedor-imagen-clima">
+      <div className="card-max">
+        <h5>Max</h5>
+        <span className="card-max">{Math.ceil(max - 273)}°</span>
+      </div>
+      <div className="img-card">
         <img
-          className="imagen-clima"
+          className="card-img"
           src={`http://openweathermap.org/img/wn/${img}@2x.png`}
           alt="imagen del clima"
         />

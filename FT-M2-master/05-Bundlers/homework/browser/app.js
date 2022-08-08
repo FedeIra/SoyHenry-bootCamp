@@ -5,8 +5,13 @@
 import { whiteboard } from "./whiteboard.js";
 
 // var socket = window.io(window.location.origin);
+// import {io} from "socket.io-client" ES6
 var socketIO = require("socket.io-client"),
-  socket = socketIO(window.location.origin); /* PERO DE QUÉ SIRVE?? */
+  socket = socketIO(
+    window.location.origin
+  ); /*  Sockets son tecnologías para hacer cosas en tiempo real, ej: chats.*/
+
+/* El io es de nuestra tecnología socket.io */
 
 socket.on("connect", function () {
   console.log("Connected!");
