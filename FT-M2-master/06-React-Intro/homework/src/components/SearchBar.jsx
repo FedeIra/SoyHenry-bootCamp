@@ -7,11 +7,11 @@ function SearchBar({ onSearch }) {
       <input
         className="buscador"
         type="text"
-        placeholder="Ciudad..."
+        placeholder="City..."
         name="texto"
       ></input>
       <button className="tarea-boton" onClick={onSearch}>
-        Agregar
+        Add
       </button>
     </div>
   );

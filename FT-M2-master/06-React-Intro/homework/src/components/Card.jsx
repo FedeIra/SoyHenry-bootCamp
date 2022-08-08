@@ -20,7 +20,7 @@ function Card({ max, min, name, img, onClose }) {
       </div>
       <div className="img-card">
         <img
-          className="card-img"
+          className="App-link"
           src={`http://openweathermap.org/img/wn/${img}@2x.png`}
           alt="imagen del clima"
         />
