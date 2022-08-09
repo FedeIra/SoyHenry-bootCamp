@@ -1,0 +1,34 @@
+.contenedor-buscador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buscador {
+  width: 20%;
+  height: 50px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  padding: 15px;
+  font-size: 25px;
+  box-shadow: -1px 4px 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-width: 5px;
+  border-color: #030303;
+}
+
+.tarea-boton {
+  background-image: url("../images/search-icon.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 3%;
+  height: 50px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: -1px 4px 1px 1px rgba(0, 0, 0, 0.2);
+  border-color: #030303;
+  border-width: 5px;
+}

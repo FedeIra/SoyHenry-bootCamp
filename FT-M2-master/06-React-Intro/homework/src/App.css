@@ -2,15 +2,27 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.jumbotron {
+  background-image: url("./images/weather-images.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 5px solid #ddd;
+  border-color: rgb(255, 255, 255);
+
+  border-radius: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-image: url("./images/weather-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.App-logo {
+  height: 10vmin;
+  pointer-events: none;
 }
 
 .App-header {
@@ -28,11 +40,14 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.display-4 {
+  font-size: 60px;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.lead {
+  font-size: 20px;
+  font-style: oblique;
+  font-weight: bold;
 }

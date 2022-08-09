@@ -1,18 +1,19 @@
 import React from "react";
+import "../hoja-de-estilos/searchBar.css";
 
-function SearchBar({ onSearch }) {
+function SearchBar(props) {
   // acá va tu código
   return (
-    <div className="contenedor-buscador">
-      <input
-        className="buscador"
-        type="text"
-        placeholder="City..."
-        name="texto"
-      ></input>
-      <button className="tarea-boton" onClick={onSearch}>
-        Add
-      </button>
+    <div>
+      <div className="contenedor-buscador">
+        <input
+          className="buscador"
+          type="text"
+          placeholder="City..."
+          aria-label="Search"
+        />
+        <button onClick={props.onSearch} className="tarea-boton"></button>
+      </div>
     </div>
   );
 }

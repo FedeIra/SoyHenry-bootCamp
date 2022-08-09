@@ -1,0 +1,24 @@
+.boton-x {
+  background-color: #5d0e0e;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  padding: 0px, 10px;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: flex;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card-min-max {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 20px;
+}

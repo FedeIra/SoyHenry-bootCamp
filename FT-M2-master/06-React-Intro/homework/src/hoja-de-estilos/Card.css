@@ -1,0 +1,23 @@
+.ciudades {
+  margin: 0 auto;
+  width: 30%;
+  background-color: rgb(2, 36, 36);
+  border-radius: 15px;
+  color: white;
+  border-color: rgb(255, 255, 255);
+  border-style: solid;
+  border-width: thick;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.boton-x {
+  background-color: #fc0000;
+  border-radius: 5px;
+  color: white;
+  padding: 0px, 10px;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

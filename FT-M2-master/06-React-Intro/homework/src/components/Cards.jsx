@@ -1,11 +1,12 @@
 import React from "react";
 import Card from "./Card";
+import "../hoja-de-estilos/Cards.css";
 
 function Cards(props) {
   // acá va tu código
   // tip, podés usar un map
   return (
-    <div className="ciudades-clima">
+    <div>
       {props.cities.map((ciudad, index) => (
         <Card
           max={ciudad.main.temp_max}
