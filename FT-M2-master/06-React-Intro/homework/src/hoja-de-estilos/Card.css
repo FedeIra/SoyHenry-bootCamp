@@ -1,12 +1,9 @@
 .ciudades {
   margin: 0 auto;
   width: 30%;
-  background-color: rgb(2, 36, 36);
   border-radius: 15px;
   color: white;
-  border-color: rgb(255, 255, 255);
   border-style: solid;
-  border-width: thick;
   cursor: pointer;
   padding: 10px;
   margin-bottom: 10px;

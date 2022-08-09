@@ -11,7 +11,7 @@ function App() {
       <div>
         <SearchBar onSearch={(ciudad) => alert(ciudad)} />
       </div>
-      <div>
+      <div className="ciudad">
         <Card
           max={Cairns.main.temp_max}
           min={Cairns.main.temp_min}
