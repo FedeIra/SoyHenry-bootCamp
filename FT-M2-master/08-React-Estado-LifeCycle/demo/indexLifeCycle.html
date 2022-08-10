@@ -42,7 +42,7 @@
         console.log('adios!!');
         console.log(document.querySelector('#numero'));
         window.removeEventListener('mousemove', this.onMove);
-      }/* componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, */
+      }/* componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, y removeEventListener las elimina. */
 
       shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.numero > 5) {

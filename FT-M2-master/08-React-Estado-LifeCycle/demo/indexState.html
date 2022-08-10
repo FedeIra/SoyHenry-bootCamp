@@ -21,15 +21,26 @@
         this.state = { /* el/los valores que quiero que tenga mi estado */
           contador: this.props.numero /* va a tener un objeto con una única propiedad. Inicialmente voy a tener el valor que me pasaron por propiedad. */
         }
-        // this.onButtonClick = this.onButtonClick.bind(this);
+        this.onButtonClick = this.onButtonClick.bind(this);
       }
-
-      // onButtonClick(){
-      //   console.log('this', this);
-      //   this.setState({
-      //     contador: this.state.contador + 1,
-      //   });
+      // PASADO A COMPONENTE DE FUNCION
+      // function Contador() {
+      //   let [contador, setContador] = useState(props.contador);
+      //   let [title, setTitle] = useState('Hola, soy el State');
       // }
+
+      // function onButtonClickContador() {
+      //   setContador(contador + 1);
+      // setTitle("soy un nuevo estado");
+      // }
+
+
+      onButtonClick(e) {
+        console.log(e);
+        this.setState({
+          contador: this.state.contador + 1,
+        });
+      }
 
       onButtonClick = () => {
         console.log('this arrow', this)

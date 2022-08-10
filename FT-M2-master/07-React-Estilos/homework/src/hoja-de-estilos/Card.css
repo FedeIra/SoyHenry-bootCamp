@@ -1,0 +1,39 @@
+.ciudades {
+  margin: 0 auto;
+  width: 30%;
+  border-radius: 15px;
+  color: white;
+  border-style: solid;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.boton-x {
+  background-color: #910d0d;
+  border-radius: 5px;
+  color: white;
+  padding: 0px, 10px;
+  font-size: 12px;
+  margin: 4px 4px 0 0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  float: right;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card-min-max {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
