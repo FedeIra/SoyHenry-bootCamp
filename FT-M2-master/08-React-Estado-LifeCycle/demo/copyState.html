@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>Henry - Demo State</title>
 </head>
+
 <body>
   <div id='app'></div>
 
@@ -13,49 +15,59 @@
   <script type="text/babel">
 
     class Children extends React.Component {
-      constructor(props) {
+      constructor(props) { // props = {title: app.state.title} = {title: 'Henry'}
+        console.log("Hola, el constructor se ejecuta una sola vez");
         super(props);
         this.state = {
-          title: this.props.title
+          title: this.props.title // this.state = {title: 'Henry'}
         };
       }
 
-      render(){
+      render() {
         return (
           <div>
             <h2>{this.state.title}</h2>
           </div>
         )
       }
+    };/* this.state.title = 'Henry' */
+
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          title: 'Henry'
+        };
+        this.onButtonClick = this.onButtonClick.bind(this);
+      }
+
+      onButtonClick() {
+        this.setState({
+          title: this.state.title === "Henry" ? "Franco" : "Henry"
+        });
+      } /* Solo se modifica el estado actual del title. */
+
+      render() {
+        console.log("render se ejecuta cada vez que el componente se renderiza");
+        return (
+          <div>
+            <h1>DEMO - Father title: {this.state.title}</h1>
+            <Children title={this.state.title} />
+            <button onClick={this.onButtonClick}>Click me!</button>
+          </div>
+        )
+      }
     };
 
-  class App extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        title: 'Henry'
-      };
-      this.onButtonClick = this.onButtonClick.bind(this);
-    }
-
-    onButtonClick() {
-      this.setState({
-        title: this.state.title === "Henry" ? "Franco" : "Henry"
-      });
-    }
-
-    render(){
-      return (
-        <div>
-          <h1>DEMO - Father title: {this.state.title}</h1>
-          <Children title={this.state.title} />
-          <button onClick={this.onButtonClick}>Click me!</button>
-        </div>
-      )
-    }
-  };
-
-  ReactDOM.render(<App />, document.getElementById('app'));
+    ReactDOM.render(<App />, document.getElementById('app'));
+    /*
+    Paso 1: render(App), valor de this.state.title = 'Henry'
+    Paso 2: render(Children), valor de this.state.title = 'Henry'. SE EJECUTA UNA SOLA VEZ.
+    Paso 3: onButtonClick: render(Children), valor de this.state.title = 'Franco'. NO LO CREA DOS VECES PQ YA ESTÁ CREADO!! SE QUEDA CON EL VALOR DE LA PRIMERA CREACIÓN QUE ERA HENRY.
+    Paso 4: onButtonClick: render(Children), valor de this.state.title = 'Henry'
+    Paso 5: and so on so on
+    */
   </script>
 </body>
+
 </html>

@@ -14,11 +14,12 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
 
+    /* El constructor se ejecuta una sola vez, a diferencia del render que se ejecuta cada vez que se modifica el estado: */
     class Contador extends React.Component {
       constructor(props) {
-        super(props);
-        this.state = {
-          contador: this.props.numero
+        super(props); /* Esto es porque extiendo de React.Component */
+        this.state = { /* el/los valores que quiero que tenga mi estado */
+          contador: this.props.numero /* va a tener un objeto con una única propiedad. Inicialmente voy a tener el valor que me pasaron por propiedad. */
         }
         // this.onButtonClick = this.onButtonClick.bind(this);
       }
@@ -32,7 +33,7 @@
 
       onButtonClick = () => {
         console.log('this arrow', this)
-        this.setState({
+        this.setState({/* para modificar el estado uso setState */
           contador: this.state.contador + 1
         })
       }

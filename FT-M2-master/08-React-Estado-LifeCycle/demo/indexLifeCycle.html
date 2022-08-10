@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>Henry - Demo LifeCycle</title>
 </head>
+
 <body>
   <div id='app'></div>
 
@@ -11,81 +13,91 @@
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
-  
-  class Numero extends React.Component {
-    constructor(props) {
-      super(props);
-      this.listRef = React.createRef();
-  }
 
-    onMove() {
-      console.log('Mouse move');
-    }
-
-    componentDidMount() {
-      console.log('Estoy en el DOM');
-      console.log(document.querySelector('#numero'));
-      document.title = this.props.numero;
-      window.addEventListener('mousemove', this.onMove);
-    }
-
-
-    componentDidUpdate(prevProps, prevState) {
-      console.log('Ya me actualicé:', prevProps);
-      console.log(document.querySelector('#numero').innerText);
-      document.title = this.props.numero;
-    }
-
-    componentWillUnmount() {
-      console.log('adios!!');
-      console.log(document.querySelector('#numero'));
-      window.removeEventListener('mousemove', this.onMove);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-      if(nextProps.numero > 5) {
-        return false
-      } else {
-        return true;
+    class Numero extends React.Component {
+      constructor(props) {
+        super(props);
+        this.listRef = React.createRef();
       }
-    }
-    
-    render() {
-      console.log('renderié!');
-      return (
-        <div id="numero">
-          {this.props.numero}
-        </div>
-      );
-    }
-  };
 
-  class Contador extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        contador: this.props.contador
+      onMove() {
+        console.log('Mouse move');
       }
-      this.onButtonClick = this.onButtonClick.bind(this);
-    }
 
-    onButtonClick(e){
-      this.setState({
-        contador: this.state.contador + 1,
-      });
-    }
-    render(){
-      return (
-        <div>
-         <button onClick={this.onButtonClick}>Suma uno!</button>
-         <Numero numero={this.state.contador} />
-         <div ref={this.listRef}>Hola</div>
-        </div>  
-      )
-    }
-  };
-  ReactDOM.render(<Contador contador={0} />, document.getElementById('app'));
+      componentDidMount() {
+        console.log('Estoy en el DOM');
+        console.log(document.querySelector('#numero'));
+        document.title = this.props.numero;
+        window.addEventListener('mousemove', this.onMove);
+      }/* componentDidMount() se invoca inmediatamente después de que un componente se monte. Es decir, apenas se ejecute el render se ejecuta esto */
+
+
+      componentDidUpdate(prevProps, prevState) {
+        console.log('Ya me actualicé:', prevProps);
+        console.log(document.querySelector('#numero').innerText);
+        document.title = this.props.numero;
+      }/* componentDidUpdate se ejecuta cuando se actualiza el estado pq le llegó una nueva propiedad. */
+
+      componentWillUnmount() {
+        console.log('adios!!');
+        console.log(document.querySelector('#numero'));
+        window.removeEventListener('mousemove', this.onMove);
+      }/* componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, */
+
+      shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.numero > 5) {
+          return false
+        } else {
+          return true;
+        }
+      }/* al eliminarse un componente se activa el componentWillUnmount() */
+
+      render() {
+        console.log('renderié!');
+        return (
+          <div id="numero">
+            {this.props.numero}
+          </div>
+        ); /* al estar entre corchete le estamos pasando propiedades. */
+      }
+    };
+
+    class Contador extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          contador: this.props.contador
+        }
+        this.onButtonClick = this.onButtonClick.bind(this);
+      }
+
+      onButtonClick(e) {
+        console.log(e); /* e hace referencia al evento */
+        this.setState({
+          contador: this.state.contador + 1,
+        });
+      }
+      render() {
+        return (
+          <div>
+            <button onClick={this.onButtonClick}>Suma uno!</button>
+            <Numero numero={this.state.contador} />
+            <div ref={this.listRef}>Hola</div>
+          </div>
+        )
+      }
+    };
+    ReactDOM.render(<Contador contador={0} />, document.getElementById('app'));
   </script>
 </body>
+
 </html>
 <!-- {this.state.contador < 3 ? <Numero numero={this.state.contador} /> : null} -->
+
+
+<!--
+1 paso: constructor Contador con contador 0.
+2 paso: render de constructor Contador
+3 paso: constructor Numero con numero 0.
+
+  -->
