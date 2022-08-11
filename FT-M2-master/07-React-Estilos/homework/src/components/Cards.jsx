@@ -16,13 +16,15 @@ function Cards({ cities, onClose }) {
               min={ciudad.min}
               name={ciudad.name}
               img={ciudad.img}
-              onClose={() => onClose(ciudad.id)}
+              onClose={() =>
+                onClose(ciudad.id)
+              } /* le pasa a card la función de onClose con el id de la ciudad. Le pasa un callback que llama a la función con el id */
               key={ciudad.id}
             />
           );
         })
       ) : (
-        <h1>No hay ciudades para mostrar</h1>
+        <h1>No search yet</h1>
       )}
     </div>
   );
