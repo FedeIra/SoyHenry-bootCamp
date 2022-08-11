@@ -18,10 +18,20 @@
       constructor(props) {
         super(props);
         this.state = {
-          contador: this.props.contador
+          contador: this.props.contador,
+          restador: this.props.restador,
+          promedio: this.props.promedio,
         }
         this.variable = this.props.contador
         this.incrementoContador = this.incrementoContador.bind(this);
+      }
+
+      promediante = () => {
+        this.setState((state) => {
+          return {
+            promedio: (state.contador + state.restador) / 2
+          }
+        })
       }
 
       onButtonClick = () => {
@@ -31,10 +41,25 @@
         console.log("Actualicé mi state :", this.state.contador)
       }
 
+      restar1 = () => {
+        this.setState((state) => {
+          return { restador: state.restador - 1 }
+        });
+        console.log("Le resté uno a mi state :", this.state.restador)
+      }
+
       incrementoContador(cuenta) {
         this.variable++;
         console.log("Soy contador ", this.variable)
       }/* Las variables no cambian el estado. PAra que se vea en el browser se tiene que ejecutar render. Render se ejecuta con this.setState. La variable se va a actualizar recién cuando se ejecute this.setState */
+
+      sumadorDeContadorYRestador = () => {
+        this.setState((state) => {
+          return { contador: state.contador + state.restador }
+        });
+        console.log("Suma de contador y restador :", this.state.contador)
+      }
+
 
       render() {
         return (
@@ -42,17 +67,31 @@
             <h1>State vs Variable Contador</h1>
             <div><button onClick={this.onButtonClick}>Suma uno!</button>
               &nbsp;Hola, soy el State {this.state.contador}!!
+              <hr />
             </div>
             <div>
               <p>Variable contador: {this.variable}</p>
               <button onClick={this.incrementoContador}>Incrementa!</button>
             </div>
+            <br /> <br />
+            <hr />
+            <div>
+              <button onClick={this.restar1}>Restar!</button>
+              &nbsp;Hola, soy el State {this.state.restador}!!
+            </div>
+            <br /> <br />
+            <hr />
+            <div>
+              <button onClick={this.promediante}>Promediar!</button>
+              &nbsp;Hola, soy el State {this.state.promedio}!!
+            </div>
           </div>
+
         )
       }
     };
 
-    ReactDOM.render(<StateContador contador={0} />, document.getElementById('app'));
+    ReactDOM.render(<StateContador contador={0} restador={100} promedio={50} />, document.getElementById('app'));
   </script>
 </body>
 
