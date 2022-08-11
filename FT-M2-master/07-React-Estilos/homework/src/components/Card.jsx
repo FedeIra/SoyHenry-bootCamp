@@ -17,8 +17,8 @@ function Card({ max, min, name, img, onClose }) {
         <h5>Max</h5>
       </div>
       <div className="card-min-max">
-        <span>{Math.floor(min - 273)}°</span>
-        <span>{Math.ceil(max - 273)}°</span>
+        <span>{min}°</span>
+        <span>{max}°</span>
       </div>
       <div className="App-logo">
         <img

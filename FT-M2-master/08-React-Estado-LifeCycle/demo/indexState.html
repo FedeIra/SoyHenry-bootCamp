@@ -17,13 +17,13 @@
     /* El constructor se ejecuta una sola vez, a diferencia del render que se ejecuta cada vez que se modifica el estado: */
     class Contador extends React.Component {
       constructor(props) {
-        super(props); /* Esto es porque extiendo de React.Component */
+        super(props); /* Esto es porque extiendo de React.Component. El super hace que la clase contador herede del constructor React.Component */
         this.state = { /* el/los valores que quiero que tenga mi estado */
           contador: this.props.numero /* va a tener un objeto con una única propiedad. Inicialmente voy a tener el valor que me pasaron por propiedad. */
-        }
+        } /* El state puede ser string, lo q sea, pero es más práctico que sea un objeto. */
         this.onButtonClick = this.onButtonClick.bind(this);
       }
-      // PASADO A COMPONENTE DE FUNCION
+      // PASADO A COMPONENTE DE FUNCIÓN
       // function Contador() {
       //   let [contador, setContador] = useState(props.contador);
       //   let [title, setTitle] = useState('Hola, soy el State');
@@ -44,7 +44,7 @@
 
       onButtonClick = () => {
         console.log('this arrow', this)
-        this.setState({/* para modificar el estado uso setState */
+        this.setState({/* para modificar el estado uso setState. Es la única forma de modificar un estado. */
           contador: this.state.contador + 1
         })
       }

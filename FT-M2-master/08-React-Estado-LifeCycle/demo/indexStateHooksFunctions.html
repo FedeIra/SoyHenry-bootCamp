@@ -19,6 +19,9 @@
     function Contador(props) {
       // setContador => this.setState({ contador})
       const [contador, setContador] = useState(props.contador);
+      const [color, setColor] = useState(false);
+      //setColor(!color); se lo puedo luego hacer en los estilos con un ternario
+      // {color ? 'red' : 'blue'}
       /* contados es el estado (state)
       el setContador es una función (setState
       el props.contador es el initialState)
@@ -29,12 +32,24 @@
       let incrementarValue = () => {
         setContador(contador + 1);
         setContador(contador + 1);
-      } /* este intente de pisar el valor */
+      } /* este intente de pisar el valor. Suma uno pq no se está actualizando en cada cambio. Se pisa y punto. NO HAY QUE UTILIZAR ESTA FORMA */
 
       const incrementarFunction = () => {
         setContador((prevState) => prevState + 1)
         setContador((prevState) => prevState + 1)
-      }/* este ya puede detectar el cambio. SE RECOMIENDA ESTA! (el callback) */
+      }/* este ya puede detectar el cambio. SE RECOMIENDA ESTA! (el callback). Para actualizar automaticamente enseguida hay que pasarle así pq toma el estado anterior. */
+
+      /* EL USEEFFECT simular el componendidMount y componentDidUpdate */
+      useEffect(() => {
+        console.log('entre al useEffect componentDidUpdate');
+        console.log(contador);
+      }, [contador]); /* el segundo argumento es el array de dependencias. Si no se pasa nada, se ejecuta una vez. Si se pasa un array, se ejecuta cuando cambia el valor del array */
+
+      // useeffect componendidMount
+      useEffect(() => {
+        console.log('entre al useEffect componendidMount');
+        console.log(contador);
+      }, []); /* el segundo argumento es el array de dependencias. Si no se pasa nada, se ejecuta una vez. Si se pasa un array, se ejecuta cuando cambia el valor del array */
 
       return (
         <div>

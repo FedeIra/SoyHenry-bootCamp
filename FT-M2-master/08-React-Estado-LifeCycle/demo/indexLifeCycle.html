@@ -29,28 +29,28 @@
         console.log(document.querySelector('#numero'));
         document.title = this.props.numero;
         window.addEventListener('mousemove', this.onMove);
-      }/* componentDidMount() se invoca inmediatamente después de que un componente se monte. Es decir, apenas se ejecute el render se ejecuta esto */
+      }/* componentDidMount() se invoca inmediatamente después de que un componente se monte. Es decir, apenas se ejecute el render se ejecuta esto. Etapa de montaje. */
 
 
-      componentDidUpdate(prevProps, prevState) {
+      componentDidUpdate(prevProps, prevState) {/* recibe las propiedades y estado anterior */
         console.log('Ya me actualicé:', prevProps);
         console.log(document.querySelector('#numero').innerText);
         document.title = this.props.numero;
-      }/* componentDidUpdate se ejecuta cuando se actualiza el estado pq le llegó una nueva propiedad. */
+      }/* componentDidUpdate se ejecuta cuando se actualiza el estado pq le llegó una nueva propiedad o cambia un estado (también cuando la forzamos, pero es mala práctica). */
+
+      shouldComponentUpdate(nextProps, nextState) { /* recibe la siguiente propiedad y estado que quiere o no actualizar. */
+        if (nextProps.numero > 5) {
+          return false /* le dice que no se actualice si la nueva propiedad del número es mayor a 5 */
+        } else {
+          return true;
+        }
+      }/* al eliminarse un componente se activa el componentWillUnmount() */
 
       componentWillUnmount() {
         console.log('adios!!');
         console.log(document.querySelector('#numero'));
         window.removeEventListener('mousemove', this.onMove);
-      }/* componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, y removeEventListener las elimina. */
-
-      shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.numero > 5) {
-          return false
-        } else {
-          return true;
-        }
-      }/* al eliminarse un componente se activa el componentWillUnmount() */
+      }/* componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, y removeEventListener las elimina. Esto pasa cuando actualizamos la página, cerramos o cambiamos de pestaña en la página web, etc. Limpia los estados para que quede vacío entonces la próxima vez que abro una cosa se carga el estado desde 0. Podes mostrar un loading mientras se carga el nuevo estado*/
 
       render() {
         console.log('renderié!');

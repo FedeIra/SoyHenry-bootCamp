@@ -1,0 +1,14 @@
+.navbar {
+  box-shadow: inset 0px 0px 400px 110px rgba(0, 0, 0, 0.7);
+  position: fixed;
+  border: solid;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}

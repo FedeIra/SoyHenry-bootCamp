@@ -38,7 +38,7 @@
         this.state = {
           title: 'Henry'
         };
-        this.onButtonClick = this.onButtonClick.bind(this);
+        this.onButtonClick = this.onButtonClick.bind(this); /* esto no es necesario si uso arrow function pq las arrow function automáticamente bindean al this de la clase constructora */
       }
 
       onButtonClick() {

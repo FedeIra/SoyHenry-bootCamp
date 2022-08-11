@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import "../hoja-de-estilos/Cards.css";
 
-function Cards({ cities }) {
+function Cards({ cities, onClose }) {
   // acá va tu código
   // tip, podés usar un map
 
@@ -12,11 +12,11 @@ function Cards({ cities }) {
         cities.map((ciudad) => {
           return (
             <Card
-              max={ciudad.main.temp_max}
-              min={ciudad.main.temp_min}
+              max={ciudad.max}
+              min={ciudad.min}
               name={ciudad.name}
-              img={ciudad.weather[0].icon}
-              onClose={() => alert(ciudad.name)}
+              img={ciudad.img}
+              onClose={() => onClose(ciudad.id)}
               key={ciudad.id}
             />
           );
