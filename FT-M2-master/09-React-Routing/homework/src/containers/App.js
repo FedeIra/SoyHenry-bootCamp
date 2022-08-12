@@ -24,7 +24,7 @@ function App() {
   function onSearch(ciudad) {
     //Llamado a la API del clima
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric`
     )
       .then((r) => r.json())
       .then((recurso) => {
@@ -68,7 +68,8 @@ function App() {
       <hr />
       <div>
         <Route
-          path="/ciudades"
+          exact
+          path="/"
           render={() => <Cards cities={cities} onClose={onClose} />}
         />
         <Route

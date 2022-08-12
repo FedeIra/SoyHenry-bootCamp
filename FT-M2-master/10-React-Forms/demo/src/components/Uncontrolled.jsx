@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 class Uncontrolled extends React.Component {
   handleSubmit(e) {
-    e.preventDefault();
-    const username = document.querySelector('input[name=username]').value;
-    const password = document.querySelector('input[name=password]').value;
+    e.preventDefault(); /* hace un quert selector directo desde el DOM */
+    const username = document.querySelector("input[name=username]").value;
+    const password = document.querySelector("input[name=password]").value;
     console.log(username, password);
   }
   render() {
