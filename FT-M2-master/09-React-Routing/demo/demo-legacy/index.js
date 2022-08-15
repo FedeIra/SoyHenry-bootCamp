@@ -1,17 +1,23 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Route, Switch, Link, HashRouter as Router, useRouteMatch } from 'react-router-dom';
+import React from "react";
+import { render } from "react-dom";
+import {
+  Route,
+  Switch,
+  Link,
+  HashRouter as Router,
+  useRouteMatch,
+} from "react-router-dom";
 
-import Home from './Home.jsx';
-import Params from './Params.jsx';
-import Other from './Other.jsx';
-import Location from './Location.jsx';
-import History from './History.jsx';
+import Home from "./Home.jsx";
+import Params from "./Params.jsx";
+import Other from "./Other.jsx";
+import Location from "./Location.jsx";
+import History from "./History.jsx";
 
 const customLocation = {
-  pathname: '/location',
-  state: { extraData: 'Henry' }
-}
+  pathname: "/location",
+  state: { extraData: "Henry" },
+};
 
 function NavBar() {
   return (
@@ -36,20 +42,15 @@ function NavBar() {
       <Link to="/history">History</Link>
     </div>
   );
-};
+}
 
 const Root = (
   <Router>
     <NavBar />
     <Switch>
-      <Route 
-        path="/component/:firstParam/:secondParam"
-        component={Params}
-      />
-      <Route 
-        path="/component"
-        component={Home}
-      />
+      <Route path="/component/:firstParam/:secondParam" component={Params} />
+      <Route path="/component" component={Home} />{" "}
+      {/* ES OTRA FORMA DE RENDERIZAR EL COMPONENTE. Con esto renderizo componentes que no tengan propiedades. */}
       {/* <Route
         path="/render/:paramOne"
         render={({ match }) => (
@@ -58,20 +59,14 @@ const Root = (
       /> */}
       <Route
         path="/render/:paramOne"
-        render={(props) => (
-          <Other {...props} Ejemplo />
-        )}
+        render={(props) => <Other {...props} Ejemplo />}
       />
+      {/* CON ESTO PUEDO RENDERIZAR COMPONENTES CON PROPIEDADES */}
       <Route
         path="/location"
-        render={(props) => (
-          <Location {...props} Ejemplo />
-        )}
+        render={(props) => <Location {...props} Ejemplo />}
       />
-      <Route 
-        path="/history"
-        component={History}
-      />
+      <Route path="/history" component={History} />
       <Route path="/">
         <h2>Default</h2>
       </Route>
@@ -79,5 +74,4 @@ const Root = (
   </Router>
 );
 
-render(Root, document.querySelector('#app'));
-
+render(Root, document.querySelector("#app"));

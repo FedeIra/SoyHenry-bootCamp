@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
+/* El objeto history de Route tiene varias propiedades:
+action, block, go, goBack, goForward, length, push y replace.
+History también tiene una propiedad location con history. Cuidado con esto que muta.*/
 export default function History({ history }) {
   const [number, setNumber] = useState(0);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   function goBack() {
     history.goBack();
@@ -13,19 +16,19 @@ export default function History({ history }) {
   }
 
   function go() {
-    if(!isNaN(number)) {
+    if (!isNaN(number)) {
       history.go(number);
     }
   }
 
   function push() {
-    if(text) {
+    if (text) {
       history.push(`/${text}`);
     }
   }
 
   function replace() {
-    if(text) {
+    if (text) {
       history.replace(`/${text}`);
     }
   }
@@ -37,13 +40,20 @@ export default function History({ history }) {
       <button onClick={goBack}>Go back</button>
       <button onClick={goForward}>Go forward</button>
       <br></br>
-      <input type="number" value={number} onChange={(e) => setNumber(e.target.value)}/>
+      <input
+        type="number"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+      />
       <button onClick={go}>Go!</button>
       <br></br>
-      <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
       <button onClick={push}>Push</button>
       <button onClick={replace}>Replace</button>
     </div>
   );
-};
-  
+}

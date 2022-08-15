@@ -31,6 +31,7 @@ export default function NavBar() {
       <h2>Barra de Navegación</h2>
       {/* <NavLink to="/">Home</NavLink> */}
       <NavLink exact to="/">
+        {/* El exact acá dice que si el estilo matchea exactamente le va a aplicar el estilo que se le defina. Si no le metes clase específica le mete una por default. */}
         Home
       </NavLink>{" "}
       {/* Si le saco el exact deja activo cualquier otro componente que hayamos activado antes*/}

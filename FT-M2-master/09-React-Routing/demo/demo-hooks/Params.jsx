@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
 import { useParams } from "react-router-dom";
 
 export default function Params(props) {
+  const a = useParams();
+  console.log(a);
+
   let { firstParam, secondParam } = useParams();
 
   return (
@@ -10,5 +13,4 @@ export default function Params(props) {
       <h2>Second Parameter: {secondParam}</h2>
     </div>
   );
-};
-  
+}

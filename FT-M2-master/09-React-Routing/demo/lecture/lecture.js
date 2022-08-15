@@ -18,6 +18,8 @@ www.otraPaginaNadaqueVer.com (apretas link y te lleva)
 www.tampocoNadaQueer.com
 */
 
+window.history.back(2)/* Si en el navegador de chrome consologues esto va los pasos que le digas atrás en el historial de búsqueda. */
+
 /* Se puede utilizar con:
 !1) HASH (#):
 */
@@ -45,11 +47,12 @@ ReactDOM.render(
 !2) BROWSER:
 */
 
+// npm i react-router-dom
 import { HashRouter, Route } from "react-router-dom";
 ReactDOM.render(
-  <Browser>
+  <BrowserRouter>
     <Route path="/" component={App} />
-  </Browser>,
+  </BrowserRouter>,
   document.getElementById("app")
 );
 
@@ -115,6 +118,23 @@ function Home() {
 } /* el tema es q le tenemos q dar ESTILO!
 Para darle estilos tenemos el:
 */
+
+/* Con el LINK te intenta llevar al to que indicas: EJEMPLO:  */
+<Link to="/Sensitive">Sensitive Mayus</Link>;
+
+/* Entonces va al Router y chequea con cuál coincide de los Route a los que se les indica el path. EJEMPLO: */
+<Route path="/sensitive">
+  <h2>No Sensitive</h2>
+</Route>;
+
+/* Adentro de los Route puede meter componentes o lo que quiera. */
+/*
+!ROUTER: es HashRouter: abraza a todos los Route
+!SWITCH va revisando todas las rutas para ver que lo último coincida con el url que pasaste. Matchea con el primero que coincide con la url que se escribe. Si coincide lo renderiza lo que este adentro del Route.
+!EXACT PATH: indica que el path tiene que hacer un match exacto. No le podes agregar nada al path tiene que ser exactamente igual. EXACTO TAMBIÉN ES ESTRICTO. ES MÁS RESTRICTIVO QUE EL STRICT
+!STRICT PATH: es parecido el exact, pero además las barritas tienen que estar iguales. No le importa que venga una barrita detrás.
+!SENSITIVE PATH: lo hace sensible a mayúscula y minúscula.
+
 /*
 !NAVLINK:
 Hace que cuando clickes el link le active el estilo que le haya pasado. Puedo hacer inline styling
@@ -155,6 +175,8 @@ exact: solo se activa si estoy parado exactamente sobre esa ruta
 */
 
 /* Con Navlink le podemos dar éstilos a nuestros links:*/
+
+// Si no le metes clase específica con estilo (activeClassName)  le mete una por default (active).
 
 export default function NavBar() {
   return (
@@ -205,8 +227,10 @@ const Root = (
     </Route>  </Router>
 );
 
+/*
+!PROPIEDADES DE LOS ROUTER  */
 render(Root, document.querySelector("#app"));
-/* En propts tiene info con 3 propiedades: location, history y match que las podemos destructurar y usar */
+/* En props tiene info con 3 propiedades: location, history y match que las podemos destructurar y usar */
 // con destructuring:
 
 
@@ -233,6 +257,8 @@ const Root2 = (
 render(Root2, document.querySelector("#app"));
 
 /* PODEMOS USAR ESTAS PROPIEDADES: */
+/* El match tiene las propiedades isExact, params, path y url.
+El params es el más importante. */
 
 function Home3(props) {
   console.log(props);
@@ -257,7 +283,7 @@ const Root3 = (
 
 render(Root, document.querySelector("#app"));
 
-/* El match te permite mandar informaicón por la URL. Podría tener un card que al hacerle click me redireccione al detalle de un elemento. */
+/* El match te permite mandar información por la URL. Podría tener un card que al hacerle click me redireccione al detalle de un elemento. */
 
 // Lo mismo puede hacerse con una ciudad:
 
@@ -340,6 +366,8 @@ GOBACK Y GOFOWARD SON LOS MÁS IMPORTANTES*/
 
 /*
 !USEPARAMS:
+Tenemos hooks para acceder a las propiedad de history, location y match.
+
 Sabemos como obtener la info del params. Ahora hay que usarla!  */
 import React from "react";
 import { render } from "react-dom";
@@ -349,7 +377,7 @@ export default function Mostrar(props) {
   console.log(props);
   let params = useParams(); /* HOOK USEPARAMS */
   return (<span>Estoy en la ciudad {params.ciudadId}</span>)
-}
+} /* a lo que accede acá es Object {ciudadIdd: 5} */
 
 
 
@@ -399,6 +427,69 @@ export default function Location() {
   let location = useLocation();
 }
 
+import React from "react";
+import { useHistory } from "react-router-dom";
+
+export default function Location() {
+  let history = useLocation();
+}
+
+/*
+!NESTED ROUTING:
+Se puede anidar el routeo. El componente padre puede tener sus links y los componentes hijos sus propios links.
+*/
+import React from 'react';
+import { render } from 'react-dom';
+import { Route, Switch, Link, HashRouter as Router, useRouteMatch } from 'react-router-dom';
+
+function NavBar() {
+  return (
+    <div className="nav-bar">
+      <h2>Barra de Navegación</h2>
+      <Link to="/">Default</Link>
+      <br></br>
+      <Link to="/home">Home</Link>
+    </div>
+  );
+};
+
+function Home() {
+  let match = useRouteMatch();
+  return (
+    <div>
+      <h2>Home, Soy Henry!!</h2>
+      <Link to='/linkAbsolute'>Link Absolute</Link>
+      <br></br>
+      <Link to={`${match.url}/linkRelative`}>Link Relative</Link>
+
+      {/* <Switch>
+        <Route path={`${match.url}/linkRelative`}>
+          <h2>Estoy en /home/linkRelative 2</h2>
+        </Route>
+      </Switch> */}
+    </div>
+  );
+};
+
+
+const Root1 = (
+  <Router>
+    <NavBar />
+    <Switch>
+      <Route path="/home/linkRelative">
+        <h2>Estoy en /home/linkRelative</h2>
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/">
+        <h2>Default</h2>
+      </Route>
+    </Switch>
+  </Router>
+);
+
+render(Root1, document.querySelector('#app'));
 
 /*
 !PROMPT
@@ -407,17 +498,17 @@ Componente que nos va a permitir mostrar un pop-up de confirmación si el usuari
 <Promp
   when={condition} /* determina si se muestra el prompt o no. */
   message="Are you sure you want to leave?"
-/>
+/> /* Permite generar pop-up o alert para que confirmen si quieren salir del window en el que están. */
 
 /*
 !REDIRECT:
-Componente que al renderizarse nos redirige hacia un nuevo path*/
+Componente que al renderizarse nos redirige hacia a un nuevo path o ruta*/
 
 {/* <Route exact path="/">
     {loggedIn ? <>Redirect to ="/dashboard"/> : <PublicHomePage/>}
 </Route> */}
 
-/* Te dice es'ta loegada la persona? Si es true renderiza el dashboard de lo cotnrario renderiza PublicHomePage */
+/* Te dice esta logeada la persona? Si es true renderiza el dashboard de lo contrario renderiza PublicHomePage */
 
 // EJEMPLO:
 
@@ -441,7 +532,7 @@ const Root6 = (
         <Home />
       </Route>
       <Route path="/old/object">
-        <Redirect to={{
+        <Redirect to={{ /* el to te dice adonde te redirige */
           pathname: "/new",
           search: "?name=Franco",
           state: {name: "Henry"}
