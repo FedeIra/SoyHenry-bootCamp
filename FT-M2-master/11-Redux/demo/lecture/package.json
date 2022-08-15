@@ -1,17 +1,15 @@
 {
-  "name": "redux-basic-flow",
+  "name": "lecture",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lecture.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/register": "^7.18.9",
-    "jsdom-quokka-plugin": "^1.0.16",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux": "^4.2.0"
   }
 }
