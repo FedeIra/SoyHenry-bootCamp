@@ -6,6 +6,18 @@ Según su descripción en su repo, react-router sirve para mantener sincronizado
 // instalarlo antes: npm i react-router-dom
 // luego hay que importarlo y abrazar a la app.
 
+/* EJEMPLO:
+www.paginaPrincipal.com (apretas link de la página y te lleva al siguiente:)
+www.paginaPrincipal.com/path (apretas link de la página y te lleva al siguiente:)
+www.paginaPrincipal.com/path/2
+*/
+
+/* SIN ROUTER:
+www.paginaPrincipal.com (apretas link y te lleva:)
+www.otraPaginaNadaqueVer.com (apretas link y te lleva)
+www.tampocoNadaQueer.com
+*/
+
 /* Se puede utilizar con:
 !1) HASH (#):
 */
