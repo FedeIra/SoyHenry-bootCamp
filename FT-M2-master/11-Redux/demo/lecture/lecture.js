@@ -7,7 +7,7 @@ Redux dice: pq no tenemos un centro de info. o cómputos y que no pertenezca a u
 Capacidad de que todos los componentes tengan conocimiento de la información mientras estén conectados al store. No significa que todos los componentes tengan que tener acceso al store. Los componentes no van en el store. Dentro del store vamos a tener estados globales para mi aplicación. Es un almacenador de estados.
 
 Principios de Redux:
-!1) Single source of truth: 
+!1) Single source of truth:
 Un único store por aplicación. No tiene porque estar vinculada a React necesariamente.
 */
 console.log(store.getState());
