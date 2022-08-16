@@ -1,39 +1,38 @@
-
 const initialState = {
   count: 0,
   loading: false,
   post: {},
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case "INCREMENT":
       return {
         ...state,
         count: state.count + 1,
-      }
-    case 'DECREMENT':
+      };
+    case "DECREMENT":
       return {
         ...state,
         count: state.count - 1,
-      }
-    case 'RESET':
+      };
+    case "RESET":
       return {
         ...state,
         count: 0,
-      }
-    case 'GET_POST':
+      };
+    case "GET_POST":
       return {
         ...state,
         loading: true,
-      }
-    case 'RECEIVE_POST':
+      };
+    case "RECEIVE_POST":
       return {
         ...state,
         loading: false,
         post: action.post,
-      }
+      };
     default:
-      return {...state}
+      return { ...state };
   }
-}
+};
