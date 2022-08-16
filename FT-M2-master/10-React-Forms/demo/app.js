@@ -5,6 +5,7 @@ import Uncontrolled from "./src/components/Uncontrolled.jsx";
 import Controlled from "./src/components/Controlled.jsx";
 import Ejemplo from "./src/components/Ejemplo.jsx";
 import DynamicInputs from "./src/components/DynamicInputs.jsx";
+import Prueba from "./src/components/Prueba.jsx";
 
 /* render(
   <div>
@@ -41,10 +42,17 @@ import DynamicInputs from "./src/components/DynamicInputs.jsx";
 ); */
 
 // Para ver controlled:
-render(
+/* render(
   <div>
     <h2>Ejemplo</h2>
     <Controlled />
+  </div>,
+  document.getElementById("app")
+); */
+render(
+  <div>
+    <h2>Ejemplo</h2>
+    <Prueba />
   </div>,
   document.getElementById("app")
 );
