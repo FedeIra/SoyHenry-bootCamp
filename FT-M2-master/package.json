@@ -26,6 +26,8 @@
     "henry-reading-time": "https://d31uz8lwfmyn8g.cloudfront.net/Modules/henry-reading-time-0.1.0.tgz",
     "markdown-it": "^12.3.0",
     "markdown-it-anchor": "^8.4.1",
-    "markdown-it-highlightjs": "^3.5.0"
+    "markdown-it-highlightjs": "^3.5.0",
+    "react": "^18.2.0",
+    "react-redux": "^8.0.2"
   }
 }
