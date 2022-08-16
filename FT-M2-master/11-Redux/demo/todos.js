@@ -1,53 +1,54 @@
-const redux = require('redux');
+const redux = require("redux");
 
 const createStore = redux.createStore;
 
-const ADD_TODO = 'ADD_TODO'
-const REMOVE_TODO = 'REMOVE_TODO';
-
+const ADD_TODO = "ADD_TODO";
+const REMOVE_TODO = "REMOVE_TODO";
 
 const initialState = {
-  todos: []
-}
+  todos: [],
+};
 
 const rootReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_TODO:
       return {
-        todos: [...state.todos, action.payload]
-      }
+        ...initialState,
+        todos: [...state.todos, action.payload],
+      };
     case REMOVE_TODO:
       return {
-        todos: state.todos.filter((text, i) => i !== action.payload)
-      }
+        ...initialState,
+        todos: state.todos.filter((text, i) => i !== action.payload),
+      };
     default:
       return state;
   }
-}
+};
 
 const store = createStore(rootReducer);
 
 store.subscribe(() => {
-  console.log('Subscription: ', store.getState());
+  console.log("Subscription: ", store.getState());
 });
 
 function addTodo(text) {
   return {
     type: ADD_TODO,
-    payload: text
-  }
+    payload: text,
+  };
 }
 
 function removeTodo(index) {
   return {
     type: REMOVE_TODO,
-    payload: index
-  }
+    payload: index,
+  };
 }
 
-store.dispatch(addTodo('Comprar pan'))
-store.dispatch(addTodo('Correr'))
+store.dispatch(addTodo("Comprar pan"));
+store.dispatch(addTodo("Correr"));
 
-store.dispatch(removeTodo(1))
+store.dispatch(removeTodo(1));
 
 console.log(store.getState());

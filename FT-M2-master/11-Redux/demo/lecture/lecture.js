@@ -49,7 +49,7 @@ No se puede modificar con React. Redux es una bolsa donde pongo información. La
 !REDUCER:
 Una vez que la accion fue dispatchada va al REDUCER que hace el cambio en el stock.
 
-El reducer es una función que definimos nosotros. Es una función pura. Ante una misma entrada tiene que tener una misma salida. Además no tiene tareas asíncronas. Son funciones normales (no acepta Math.random()).
+El reducer es una función que definimos nosotros. Es una función pura. Ante una misma entrada tiene que tener una misma salida. Además no tiene tareas asíncronas. Son funciones normales (no acepta Math.random()).Tiene que ser una función pura, es decir, ante mismo input devuelve el mismo resultado siempre.
 
 Es una función que recibe el dispatcher, analiza que tipo de info. quiere, evalua sobre todo lo que se haya definido, y lo ejecuta. El reducer SIEMPRE devuelve un nuevo estado.
 
