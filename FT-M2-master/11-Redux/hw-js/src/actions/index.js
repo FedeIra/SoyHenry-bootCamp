@@ -8,12 +8,30 @@ const { INCREMENTO, DECREMENTO } = require("../action-types");
 // Eso se lo deja al reducer(s).
 
 const incremento = () => {
-  return { type: INCREMENTO };
+  return {
+    type: INCREMENTO,
+    payload: 1,
+  };
 };
 
 const decremento = () => {
+  return {
+    type: DECREMENTO,
+    payload: 1 /* Es la acción que cambia al estado. son datos para la modificación del estado */,
+  };
+};
+
+/* OTRA FORMA YA QUE NO RECIBE PROPIEDADES (en lugar de funciones declarar los objetos. Si reciben propiedades si o si como funciones):
+
+const incremento =  {
+  return { type: INCREMENTO };
+};
+
+const decremento = {
   return { type: DECREMENTO };
 };
+
+ */
 
 module.exports = {
   incremento,
