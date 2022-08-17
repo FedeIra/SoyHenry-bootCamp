@@ -253,13 +253,13 @@ const Counter = ({ counter, increment, decrement, reset, fetchPost }) => (
     {/* la propiedad counter viene de: const mapStateToProps = (state) => ({
   counter: state.count,
 }); En definitiva, es equivalente a store.getState().count */}
-    Clicked: {counter} times <button onClick={increment}>+</button>{" "}
+    Clicked: {counter} times <button onClick={increment}>+</button>
     {/* le paso la definición de la función. NO ES LA INVOCACIÓN. Si le quiero pasar un parámetro tengo que hacer una función flecha
     PASOS QUE HACE:
     1) onClick = {store.dispatch(increment())}
     2) onClick = {store.dispatch({type: "INCREMENT"}) Esto va al reducer
     3) counter: state.count => 1*/}
-    <button onClick={decrement}>-</button>{" "}
+    <button onClick={decrement}>-</button>
     <button onClick={reset}>Reset</button>
     {/* reset = () => store.dispatch(reset({type: "RESET"}))
     Llega al reducer con el valor reset, modifica el estado y pone el count en 0. */}
