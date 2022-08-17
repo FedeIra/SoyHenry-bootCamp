@@ -13,13 +13,25 @@ const reducer = (state = initialState, action) => {
   // Cambia el código debajo de esta línea
   switch (action.type) {
     case GET_MOVIES:
-      return {};
+      return {
+        ...state,
+        moviesLoaded: action.payload.Search,
+      };
     case GET_MOVIE_DETAIL:
-      return {};
+      return {
+        ...state,
+        movieDetail: action.payload.Search,
+      };
     case ADD_MOVIE_FAVORITE:
-      return {};
+      return {
+        ...state,
+        moviesFavourites: state.moviesFavourites.concat(action.payload),
+      };
     case REMOVE_MOVIE_FAVORITE:
-      return {};
+      return {
+        ...state,
+        moviesFavourites: [state.moviesFavourites.splice(0, action.payload)],
+      };
     default:
       return { ...state };
   }
