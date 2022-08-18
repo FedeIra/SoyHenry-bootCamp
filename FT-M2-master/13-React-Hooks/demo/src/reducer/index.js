@@ -1,16 +1,29 @@
 const initialState = {
-  name: ''
-}
+  name: "",
+};
 
-const reducer = (state = initialState, action) => {
+/* const initialState = []; */
+
+export default (state = initialState, action) => {
   switch (action.type) {
-      case 'SAVE_NAME':
-        return {
-          name: action.payload
-        }
+    case "SAVE_NAME":
+      return {
+        name: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default reducer;
+/* const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SAVE_NAME":
+      return {
+        name: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default reducer; */
