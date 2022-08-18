@@ -1,4 +1,5 @@
-
+/*
+!Así funciona por detrás redux:  */
 function Store(estadoInicial, reducer) {
   this._state = estadoInicial;
   this.reducer = reducer;
@@ -11,7 +12,7 @@ Store.prototype.getState = function getState() {
 
 Store.prototype.dispatch = function dispatch(action) {
   this._state = this.reducer(this._state, action);
-  this._listeners.forEach(function(listener){
+  this._listeners.forEach(function (listener) {
     listener();
   });
 };
@@ -19,8 +20,8 @@ Store.prototype.dispatch = function dispatch(action) {
 Store.prototype.suscribe = function suscribe(listener) {
   this._listeners.push(listener);
   return () => {
-    this._listeners = this._listeners.filter(l => l !== listener);
-  }
-}
+    this._listeners = this._listeners.filter((l) => l !== listener);
+  };
+};
 
 module.exports = Store;

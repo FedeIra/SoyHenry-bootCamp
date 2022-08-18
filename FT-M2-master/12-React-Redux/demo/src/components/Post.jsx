@@ -15,7 +15,7 @@ const Post = (
         const value =
           document.querySelector(
             "input"
-          ).value; /* onclick dice que cuando le des click a get tome el valor que se guardó en input. Ponga en value este valor y ejecuta la función fetchPost pasandole como parámetro este value.
+          ).value; /* NO ES UN FORMULARIO CONTROLADO. onclick dice que cuando le des click a get tome el valor que se guardó en input. Ponga en value este valor y ejecuta la función fetchPost pasandole como parámetro este value.
           La función fetchPost es: store.dispatch(fetchPost(value))
           Primero se resuelve la parte de fetchPost(value) */
         fetchPost(value);

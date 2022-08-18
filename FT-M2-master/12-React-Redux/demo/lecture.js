@@ -5,7 +5,7 @@ Que el componente reciba por propiedades los valores del estado que se van rende
 Hay que tratar de dividir los componentes smart de los dumb:
 */
 /*
-!Smart:
+!Smart: (ej cards en el homework o app)
 1) saben cómo funcionan las cosas
 2) encargados de obtener info. y contienen los pequños elementos,
 3) sin estilos,
@@ -13,12 +13,13 @@ Hay que tratar de dividir los componentes smart de los dumb:
 5) invoca las acciones  */
 
 /*
-!Dumb:
+!Dumb: (ej: card en el homework)
 1) cómo  se ven las cosas
 2) trabaja con sus props,
 3) Generalmente no tienen estado propio (algunos sí) */
 
 /*
+!Containers (los smarts)
 Separarlos te da ventajas. Separa los problemas de la l{ogica de lo presentacional.
 Obtenemos componentes reutilizables.
 Localizamos la complejidad en un solo doc.
@@ -26,7 +27,7 @@ Localizamos la complejidad en un solo doc.
 Los presentacionales (dumb) no saben de redux, lee sus propiedades de props, invoca callbacks de sus props. Los containers (smart) se trata de cómo funcionan las cosas, saben de redux, suscribe a los estados de Redux y envían acciones a redux.*/
 
 /*
-!CONEXIÓN REACT-REDUX:
+!CONEXIÓN REACT-REDUX (desde el contenedor o componente smart):
 */
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux"; /* esto conecta React y Redux */
@@ -79,7 +80,7 @@ const App2 = connect(mapStateToProps, mapDispatchToProps)(Main);
 //       increment={store.dispatch(increment())}
 //       decrement={store.dispatch(decrement())}
 // export default App2;
-
+// conecta a nuestro componente Main con redux. MapState se refiere a los estados y MapDispatch es para despachar acciones. Le podemos conectar la parte que necesitemos, le podemos poner null a mapStatestoProps si no la necesitamos o con mapDispatch ni ponerlo.
 /* Cómo se entera nuestra aplicación que estamos trabajando con un store?? */
 
 /* LO HACE EL COMPONENTE PROVIDER: */

@@ -9,7 +9,7 @@ const initialState = {
   movieDetail: {},
 };
 
-const reducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   // Cambia el código debajo de esta línea
   switch (action.type) {
     case GET_MOVIES:
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case GET_MOVIE_DETAIL:
       return {
         ...state,
-        movieDetail: action.payload.Search,
+        movieDetail: action.movie,
       };
     case ADD_MOVIE_FAVORITE:
       return {
@@ -30,7 +30,9 @@ const reducer = (state = initialState, action) => {
     case REMOVE_MOVIE_FAVORITE:
       return {
         ...state,
-        moviesFavourites: [state.moviesFavourites.splice(0, action.payload)],
+        moviesFavourites: state.moviesFavourites.filter(
+          (movie) => movie.id !== action.payload
+        ),
       };
     default:
       return { ...state };
@@ -38,19 +40,4 @@ const reducer = (state = initialState, action) => {
   // Cambia el código encima de esta línea
 };
 
-export default reducer;
-
-/* function posts(state = [], action) {
-  switch (action.type) {
-    case "INCREMENT_LIKES":
-      console.log("increment Likes");
-      const i = action.index;
-      return [
-        ...state.slice(0, i), // antes del que estamos actualizando
-        { ...state[i], likes: state[i].likes + 1 },
-        ...state.slice(i + 1), // despues del actualizado
-      ];
-    default:
-      return state;
-  }
-} */
+export default rootReducer;

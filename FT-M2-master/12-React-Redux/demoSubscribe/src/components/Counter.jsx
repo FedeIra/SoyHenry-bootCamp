@@ -1,50 +1,44 @@
-import React, { Component } from 'react';
-import store from '../store.js';
+import React, { Component } from "react";
+import store from "../store.js";
 // Import para actions separadas
-import {increment, decrement, reset} from '../actions/index.js'
+import { increment, decrement, reset } from "../actions/index.js";
 // Import para las actions todas juntas
-import * as actionCreators from '../actions/index.js'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import * as actionCreators from "../actions/index.js";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 // Opcción 1:
 //  - Valores: Acceder directamente al store desde el componente
 //  - Actions: Despachar directo desde el componente
 
 class Counter extends Component {
- constructor() {
-   super();
-   this.state = { count: 0 };
- }
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
 
- componentDidMount() {
-   this.unsubscribeStore = store.subscribe(() => {
-     this.setState({
-       count: store.getState().count
-     });
-   });
- }
+  componentDidMount() {
+    this.unsubscribeStore = store.subscribe(() => {
+      this.setState({
+        count: store.getState().count,
+      });
+    });
+  }
 
- componentWillUnmount() {
-   this.unsubscribeStore();
- };
+  componentWillUnmount() {
+    this.unsubscribeStore();
+  }
 
- render() {
-   return (
-     <p>
-       Clicked: {this.state.count} times
-       <button onClick={() => store.dispatch(increment())}>
-         +
-       </button>
-       <button onClick={() => store.dispatch(decrement())}>
-         -
-       </button>
-       <button onClick={() => store.dispatch(reset())}>
-         Reset
-       </button>
-     </p>
-   )
- }
+  render() {
+    return (
+      <p>
+        Clicked: {this.state.count} times
+        <button onClick={() => store.dispatch(increment())}>+</button>
+        <button onClick={() => store.dispatch(decrement())}>-</button>
+        <button onClick={() => store.dispatch(reset())}>Reset</button>
+      </p>
+    );
+  }
 }
 
 export default Counter;

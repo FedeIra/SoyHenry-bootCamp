@@ -1,36 +1,33 @@
-
 const initialState = {
   count: 0,
-  data: {
-
-  },
+  data: {},
   amigos: ["Franco", "Toni"],
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case "INCREMENT":
       return {
         ...state,
         count: state.count + 1,
-      }
-    case 'DECREMENT':
+      };
+    case "DECREMENT":
       return {
         ...state,
         count: state.count - 1,
-      }
-    case 'RESET':
+      };
+    case "RESET":
       return {
         ...state,
         count: 0,
-      }
-    case 'ADD_FRIEND':
-      state.amigos.push("Tito");
+      };
+    case "ADD_FRIEND":
+      /* state.amigos.push("Tito"); */
       return {
         ...state,
-        amigos: state.amigos
+        amigos: [...state.amigos, "Tito"],
       };
     default:
-      return {...state}
+      return { ...state };
   }
-}
+};

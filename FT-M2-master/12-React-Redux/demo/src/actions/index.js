@@ -38,7 +38,7 @@ export function fetchPost(valor) {
     axios /* ahora llega la parte asincrona. Hace consulta a esta url con el valor (número) que recibió como parametro */
       .get(`https://jsonplaceholder.typicode.com/todos/${valor}`)
       .then(
-        (r) => r.data
+        (respuesta) => respuesta.data
       ) /* accedes a un dato gracias al número que representa un id */
       .then((d) =>
         dispatch(receivePost(d))
