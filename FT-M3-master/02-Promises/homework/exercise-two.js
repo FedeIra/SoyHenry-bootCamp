@@ -96,17 +96,13 @@ function problemB() {
   ); */
 
   // promise version
-  Promise.all(
-    filenames
-      .map((filename, index) =>
-        promisifiedReadFile(filename).then(function (stanza) {
-          blue(stanza[index]);
-        })
-      )
-      .finally(function () {
-        console.log("done");
-      })
+  var promesas = filenames.map((filename) =>
+    promisifiedReadFile(filename).then(function (stanza) {
+      blue(stanza[index]);
+    })
   );
+
+  Promise.all(promesas).then(stanzas);
 }
 
 function problemC() {
