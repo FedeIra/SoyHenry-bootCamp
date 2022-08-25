@@ -1,5 +1,5 @@
-var fs = require("fs");
-var http = require("http");
+var fs = require('fs');
+var http = require('http');
 
 // Escribí acá tu servidor
 /* Tenemos que ir mostrando dependiendo de la ruta una imagen o la otra que estan en images.
@@ -21,15 +21,15 @@ http
   .createServer(function (req, res) {
     fs.readFile(`./images${req.url}.jpg`, function (err, data) {
       if (err) {
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.end("img not found");
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('img not found');
       } else {
-        res.writeHead(200, { "Content-Type": "image/jpeg" });
+        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
         res.end(data);
       }
     });
   })
-  .listen(1337, "127.0.0.1");
+  .listen(1337, '127.0.0.1');
 
 //function to readfile according to the url
 
