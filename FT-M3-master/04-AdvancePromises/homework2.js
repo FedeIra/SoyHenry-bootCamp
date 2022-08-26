@@ -4,28 +4,27 @@ Promises Workshop: construye la libreria de ES6 promises, pledge.js
 ----------------------------------------------------------------*/
 // // TU CÓDIGO AQUÍ:
 function $Promise(executor) {
-  // if typeof executor is not a function return type error:
   if (typeof executor !== 'function') {
-    throw new TypeError('executor must be a function');
+    throw new TypeError(`executor is not a function`);
   }
-  this._state = 'pending';
+  this._state = `pending`;
   this._handlerGroups = [];
 
   executor(this._internalResolve.bind(this), this._internalReject.bind(this));
 }
 
 $Promise.prototype._internalResolve = function (data) {
-  if (this._state === 'pending') {
-    this._state = 'fulfilled';
+  if (this._state === `pending`) {
+    this._state = `fulfilled`;
     this._value = data;
+    this._callHandlers();
   }
-  this._callHandlers();
 };
 
-$Promise.prototype._internalReject = function (error) {
-  if (this._state === 'pending') {
-    this._state = 'rejected';
-    this._value = error;
+$Promise.prototype._internalReject = function (data) {
+  if (this._state === `pending`) {
+    this._state = `rejected`;
+    this._value = data;
   }
 };
 
@@ -40,7 +39,7 @@ $Promise.prototype.then = function (successCb, errorCb) {
     successCb,
     errorCb,
   });
-  if (this._state !== 'pending') {
+  if (this._state !== `pending`) {
     this._callHandlers();
   }
 };
@@ -56,6 +55,9 @@ $Promise.prototype._callHandlers = function () {
   }
 };
 
+$Promise.prototype.catch = function () {
+  return this.then(null, erroCb);
+};
 /*-------------------------------------------------------
 El spec fue diseñado para funcionar con Test'Em, por lo tanto no necesitamos
 realmente usar module.exports. Pero aquí está para referencia:
