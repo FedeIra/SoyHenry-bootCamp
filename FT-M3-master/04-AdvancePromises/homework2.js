@@ -56,7 +56,7 @@ $Promise.prototype._callHandlers = function () {
 };
 
 $Promise.prototype.catch = function () {
-  return this.then(null, erroCb);
+  this.then(null, errorCb);
 };
 /*-------------------------------------------------------
 El spec fue diseñado para funcionar con Test'Em, por lo tanto no necesitamos

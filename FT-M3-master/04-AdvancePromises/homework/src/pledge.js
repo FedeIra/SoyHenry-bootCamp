@@ -18,14 +18,15 @@ $Promise.prototype._internalResolve = function (data) {
   if (this._state === 'pending') {
     this._state = 'fulfilled';
     this._value = data;
+    this._callHandlers();
   }
-  this._callHandlers();
 };
 
 $Promise.prototype._internalReject = function (error) {
   if (this._state === 'pending') {
     this._state = 'rejected';
     this._value = error;
+    this._callHandlers();
   }
 };
 
