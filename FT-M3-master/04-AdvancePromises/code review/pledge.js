@@ -41,16 +41,25 @@ $Promise.prototype._internalReject = function (data) {
 $Promise.prototype.then = function (successH, errorH) {
   if (typeof successH !== "function") successH = false;
   if (typeof errorH !== "function") errorH = null;
-  this._handlerGroups.push({ successCb: successH, errorCb: errorH });
+
+  let downstreamPromise = new $Promise(function () {});
+
+  this._handlerGroups.push({
+    successCb: successH,
+    errorCb: errorH,
+    downstreamPromise,
+  });
 
   if (this._state !== "pending") {
     this._llamarHandlers();
   }
+
+  return downstreamPromise;
 };
 
 $Promise.prototype.catch = function (errH) {
   // .catch(err => throw new Error(err))
-  this.then(null, errH);
+  return this.then(null, errH);
 };
 
 $Promise.prototype._llamarHandlers = function () {
@@ -60,12 +69,61 @@ $Promise.prototype._llamarHandlers = function () {
   //       [   ]
 
   while (this._handlerGroups.length > 0) {
-    var handler = this._handlerGroups.shift(); // { successCb: false, errorCb: d }
+    var handler = this._handlerGroups.shift(); // { successCb: false, errorCb: x, downstreamPromise}
 
     if (this._state === "fulfilled") {
-      handler.successCb && handler.successCb(this._value);
+      // evaluo si no hay handler
+      if (!handler.successCb) {
+        handler.downstreamPromise._internalResolve(this._value);
+      } else {
+        // si hay handler
+        try {
+          // si hay handler intento llamarlo
+          let resultado = handler.successCb(this._value);
+          if (resultado instanceof $Promise) {
+            resultado.then(
+              function (value) {
+                handler.downstreamPromise._internalResolve(value);
+              },
+              function (err) {
+                handler.downstreamPromise._internalReject(err);
+              }
+            );
+          } else {
+            handler.downstreamPromise._internalResolve(resultado);
+          }
+        } catch (error) {
+          // manejo errores para omdificar mi downstreamPromise
+          handler.downstreamPromise._internalReject(error);
+        }
+      }
     } else {
-      handler.errorCb && handler.errorCb(this._value);
+      // el state es "rejected"
+
+      // evaluo si no hay handler
+      if (!handler.errorCb) {
+        handler.downstreamPromise._internalReject(this._value);
+      } else {
+        // si hay handler
+        try {
+          // intento llamarlo
+          let resultado = handler.errorCb(this._value);
+          if (resultado instanceof $Promise) {
+            resultado.then(
+              function (value) {
+                handler.downstreamPromise._internalResolve(value);
+              },
+              function (err) {
+                handler.downstreamPromise._internalReject(err);
+              }
+            );
+          } else {
+            handler.downstreamPromise._internalResolve(resultado);
+          }
+        } catch (error) {
+          handler.downstreamPromise._internalReject(error);
+        }
+      }
     }
   }
 };
