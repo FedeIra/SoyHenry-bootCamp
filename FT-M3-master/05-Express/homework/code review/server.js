@@ -1,5 +1,5 @@
-const bodyParser = require("body-parser");
-const express = require("express");
+const bodyParser = require('body-parser');
+const express = require('express');
 const STATUS_USER_ERROR = 422;
 
 // This array of posts persists in memory across requests. Feel free
@@ -14,12 +14,12 @@ let postId = 0;
 
 // TODO: your code to handle requests
 
-server.post("/posts", (req, res) => {
+server.post('/posts', (req, res) => {
   const { author, title, contents } = req.body;
 
   if (!author || !title || !contents) {
     res.status(STATUS_USER_ERROR).json({
-      error: "No se recibieron los parámetros necesarios para crear el Post",
+      error: 'No se recibieron los parámetros necesarios para crear el Post',
     });
   } else {
     const newPost = { author, title, contents, id: postId };
@@ -31,13 +31,13 @@ server.post("/posts", (req, res) => {
   }
 });
 
-server.post("/posts/author/:author", (req, res) => {
+server.post('/posts/author/:author', (req, res) => {
   const { author } = req.params;
   const { title, contents } = req.body;
 
   if (!author || !title || !contents) {
     res.status(STATUS_USER_ERROR).json({
-      error: "No se recibieron los parámetros necesarios para crear el Post",
+      error: 'No se recibieron los parámetros necesarios para crear el Post',
     });
   } else {
     const newPost = { author, title, contents, id: postId };
@@ -49,7 +49,7 @@ server.post("/posts/author/:author", (req, res) => {
   }
 });
 
-server.get("/posts", (req, res) => {
+server.get('/posts', (req, res) => {
   // localhost:3000/posts?term=vacaciones
   const { term } = req.query;
 
@@ -66,35 +66,35 @@ server.get("/posts", (req, res) => {
   }
 });
 
-server.get("/posts/:author", (req, res) => {
+server.get('/posts/:author', (req, res) => {
   const postsByAuthor = posts.filter((p) => p.author === req.params.author);
 
   if (postsByAuthor.length) res.json(postsByAuthor);
   else
     res
       .status(STATUS_USER_ERROR)
-      .json({ error: "No existe ningun post del autor indicado" });
+      .json({ error: 'No existe ningun post del autor indicado' });
 });
 
-server.get("/posts/:author/:title", (req, res) => {
+server.get('/posts/:author/:title', (req, res) => {
   const postsByAuthorAndTitle = posts.filter(
     (p) => p.author === req.params.author && p.title === req.params.title
   );
 
   if (postsByAuthorAndTitle.length) res.json(postsByAuthorAndTitle);
   else
-    res.status(STATUS_USER_ERROR).json({
-      error: "No existe ningun post con dicho titulo y autor indicado",
+    return res.status(STATUS_USER_ERROR).json({
+      error: 'No existe ningun post con dicho titulo y autor indicado',
     });
 });
 
-server.put("/posts", (req, res) => {
+server.put('/posts', (req, res) => {
   const { id, title, contents } = req.body;
 
   if (!id || !title || !contents) {
-    res.status(STATUS_USER_ERROR).json({
+    return res.status(STATUS_USER_ERROR).json({
       error:
-        "No se recibieron los parámetros necesarios para modificar el Post",
+        'No se recibieron los parámetros necesarios para modificar el Post',
     });
   } else {
     let onePost = posts.find((p) => p.id === id);
@@ -106,15 +106,15 @@ server.put("/posts", (req, res) => {
       res.json(onePost);
     } else {
       res.status(STATUS_USER_ERROR).json({
-        error: "No existe ningun Post con el id indicado",
+        error: 'No existe ningun Post con el id indicado',
       });
     }
   }
 });
 
-server.delete("/posts", (req, res) => {
+server.delete('/posts', (req, res) => {
   if (!req.body.id)
-    res.status(STATUS_USER_ERROR).json({ error: "No se recibió un ID" });
+    res.status(STATUS_USER_ERROR).json({ error: 'No se recibió un ID' });
   else {
     const onePost = posts.find((p) => p.id === req.body.id);
 
@@ -125,14 +125,14 @@ server.delete("/posts", (req, res) => {
     } else {
       res
         .status(STATUS_USER_ERROR)
-        .json({ error: "Ningun Post coincide con el ID provisto" });
+        .json({ error: 'Ningun Post coincide con el ID provisto' });
     }
   }
 });
 
-server.delete("/author", (req, res) => {
+server.delete('/author', (req, res) => {
   if (!req.body.author) {
-    res.status(STATUS_USER_ERROR).json({ error: "No se recibió un autor" });
+    res.status(STATUS_USER_ERROR).json({ error: 'No se recibió un autor' });
   }
 
   const postsToBeDeleted = posts.filter((p) => p.author === req.body.author);
@@ -140,7 +140,7 @@ server.delete("/author", (req, res) => {
   if (!postsToBeDeleted.length) {
     res
       .status(STATUS_USER_ERROR)
-      .json({ error: "No existe el autor indicado" });
+      .json({ error: 'No existe el autor indicado' });
   } else {
     posts = posts.filter((p) => p.author !== req.body.author);
     res.json(postsToBeDeleted);
