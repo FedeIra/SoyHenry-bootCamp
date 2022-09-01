@@ -1,52 +1,78 @@
 'use strict';
 
 var express = require('express');
-const { listFamilies } = require('../models/model.js');
+const {
+  listCharacter,
+  addFamily,
+  listFamilies,
+  addCharacter,
+  addQuote,
+  showQuotes,
+} = require('../models/model.js');
+
 var router = express.Router();
-var model = require('../models/model.js')
+var model = require('../models/model.js');
 
+// Routes abajo:
+// Get Family
 router.get('/families', (req, res) => {
-    res.json(model.listFamilies());
-})
+  res.status(200).json(listFamilies());
+});
+
+// add family
 router.post('/families', (req, res) => {
-    const { family } = req.body
-    const newFamily = model.addFamily(family)
-    res.json(newFamily);
-})
+  // const { family } = req.body;
+  const family = req.body.family;
+  res.status(200).json(addFamily(family));
+});
+
+// get characters
 router.get('/characters', (req, res) => {
-    res.json(model.listCharacter());
-})
+  const { family, pluckName } = req.body;
+  res.status(200).json(listCharacter(family, pluckName));
+});
+
+// post addCharacter
 router.post('/characters', (req, res) => {
-    const { name, age, family } = req.body
-    const familyFound = listFamilies().find(f => f === family)
-    if(!familyFound){
-        res.status(400).json({msg: 'La familia ingresada no existe'})
-    }
-    const newCharacter = model.addCharacter(name, age, family)
-    res.json(newCharacter);
-})
+  const { name, age, family } = req.body;
+  let resultado = addCharacter(name, age, family);
 
-router.get('/characters/:name', (req, res) => {
-    const { name } = req.params
-    const { pluck } = req.query
-    res.json(model.listCharacter(name, Boolean(pluck)));
-})
+  if (resultado) {
+    res.status(200).json(resultado);
+  } else {
+    res.status(400).json({ msg: 'La familia ingresada no existe' });
+  }
+});
 
-router.get('/quotes', (req, res) => {
-    const { name } = req.body
-    res.json(model.showQuotes(name));
-})
+//  /characters/:name
+router.get(`/characters/:name`, (req, res) => {
+  const { name } = req.params;
+  const { pluck } = req.query;
 
-router.post('/quotes', (req, res) => {
-    const { name, quote, season } = req.body
-    const newQuote = {
-        text: quote,
-        season: season,
-    }
-    model.addQuote(name, newQuote);
-    res.json({msg: "Frase agregada correctamente"});
-})
+  res.status(200).json(listCharacter(name, Boolean(pluck)));
+});
 
+// quotes get
+router.get(`/quotes`, (req, res) => {
+  const { name } = req.body;
+
+  res.status(200).json(showQuotes(name));
+});
+
+//  /quotes post
+//     × POST agrega una nueva frase al personaje indicado y devuelve el mensaje indicado(18 ms)
+router.post(`/quotes`, (req, res) => {
+  const { name, quote, season } = req.body;
+
+  let newQuote = {
+    season,
+    text: quote,
+  };
+
+  res.status(200).json(addQuote(name, newQuote));
+});
+
+// ---------------------------------------
 module.exports = router;
 // escriban sus rutas acá
 // siéntanse libres de dividir entre archivos si lo necesitan
