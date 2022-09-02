@@ -49,7 +49,7 @@ describe('Model', function () {
       expect(Model.listCharacters()).to.have.length(2);
     });
 
-    it('Inicialmente las varitas de los personajes deben ser objetos vacios', function () {
+    it('Inicialmente las varxitas de los personajes deben ser objetos vacios', function () {
       Model.addHouse('Gryffindor');
       Model.addCharacter('Harry', 'Potter', 'Gryffindor', '31-07-1980', false);
       expect(Model.listCharacters()).to.have.length(1);
@@ -154,9 +154,9 @@ describe('Model', function () {
       Model.addSpell('Harry', 1, 'Kadabra', 'es mágico');
       expect(Model.showSpells('Harry')).to.have.length(1);
       expect(Model.showSpells('Harry')[0].description).to.eql('es mágico');
-      Model.addSpell('Harry', 2, 'otro', 'levita');
+      Model.addSpell('Harry', 2, 'otro', 'levxita');
       expect(Model.showSpells('Harry')).to.have.length(2);
-      expect(Model.showSpells('Harry')[1].description).to.eql('levita');
+      expect(Model.showSpells('Harry')[1].description).to.eql('levxita');
     });
 
     it('Devuelve un arreglo vacío si el personaje no existe', function () {
@@ -181,13 +181,13 @@ describe('Model', function () {
   });
 
   describe('`showWand` y `addWand`', function () {
-    it('Inicialmente devuelve el string "el personaje no tiene varita"', function () {
+    it('Inicialmente devuelve el string "el personaje no tiene varxita"', function () {
       Model.addHouse('Gryffindor');
       Model.addCharacter('Harry', 'Potter', 'Gryffindor', '31-07-1980', false);
-      expect(Model.showWand('Harry')).to.eql('el personaje no tiene varita');
+      expect(Model.showWand('Harry')).to.eql('el personaje no tiene varxita');
     });
 
-    it('Agrega una varita al personaje', function () {
+    it('Agrega una varxita al personaje', function () {
       Model.addHouse('Gryffindor');
       Model.addCharacter('Harry', 'Potter', 'Gryffindor', '31-07-1980', false);
       Model.addWand('Harry', 'holly', 'phoenix feather', 11);
@@ -196,12 +196,12 @@ describe('Model', function () {
       expect(Model.showWand('Harry').length).to.eql(11);
     });
 
-    it('Devuelve el string: "Ya existe una varita para este personaje" si el personaje ya tiene varita', function () {
+    it('Devuelve el string: "Ya existe una varxita para este personaje" si el personaje ya tiene varxita', function () {
       Model.addHouse('Gryffindor');
       Model.addCharacter('Harry', 'Potter', 'Gryffindor', '31-07-1980', false);
       Model.addWand('Harry', 'holly', 'phoenix feather', 11);
-      expect(Model.addWand('Harry', 'otro', 'levita', 22)).to.eql(
-        'Ya existe una varita para este personaje'
+      expect(Model.addWand('Harry', 'otro', 'levxita', 22)).to.eql(
+        'Ya existe una varxita para este personaje'
       );
     });
 

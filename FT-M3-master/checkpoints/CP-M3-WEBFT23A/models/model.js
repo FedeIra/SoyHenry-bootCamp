@@ -19,15 +19,34 @@ module.exports = {
     // Devuelve un arreglo con todos los personajes
     // Si recibe un nombre de house como parámetro debería filtrar solo los personajes de ella
     // Si recibe un segundo parámetro en true debe devolver únicamente los nombres y apellidos de los personajes
+    if (house && !fullName) {
+      let filteredCharacters = characters.filter(
+        (char) => char.houseId === houses.indexOf(house) + 1
+      );
+      return filteredCharacters;
+    }
+    if (house && fullName) {
+      let filteredCharacters = characters
+        .filter((char) => char.houseId === houses.indexOf(house) + 1)
+        .map((element) => `${element.name} ${element.lastName}`);
+      return filteredCharacters;
+    }
+    return characters;
   },
 
   addHouse: function (house) {
     // Agrega el nombre de una nueva casa verificando que no exista
     // Debe retornar el nombre de la casa agregado o existente
+    const casa = houses.find((element) => element === house);
+
+    if (!casa) {
+      houses.push(house);
+    }
+    return house;
   },
   listHouses: function () {
     // Devuelve un arreglo con todas las casas
-    let arr = [this.listHouses];
+    return houses;
   },
 
   addCharacter: function (name, lastName, house, dateOfBirth, isMuggle) {
@@ -41,6 +60,23 @@ module.exports = {
     // no debe agregarse el personaje al arreglo de personajes y debe devolver un objeto con un mensaje de error,
     // (mirar en los tests)
     // Si la casa existe y el personaje es agregado con éxito debe retornar el personaje creado
+    let resultado = houses.find((element) => element === house);
+
+    if (!resultado) {
+      return { msg: 'La casa ingresada no existe' };
+    }
+    const newCharacter = {
+      name,
+      houseId: houses.indexOf(house) + 1,
+      lastName,
+      dateOfBirth,
+      yearOfBirth: Number(dateOfBirth.split('-').pop()),
+      isMuggle,
+      wand: {},
+      spells: [],
+    };
+    characters.push(newCharacter);
+    return newCharacter;
   },
 
   addSpell: function (name, id, spellName, description) {
@@ -50,12 +86,32 @@ module.exports = {
     //{id: id, spellName: spellName, description: description}
     // una vez agregado el hechizo debe retornar un objeto con un mensaje de éxito (ver el test de las rutas)
     // Si no se le pasa id, spellName o description no agrega el hechizo al personaje
+    let characterFilter = characters.find((element) => element.name === name);
+
+    if (characterFilter && id && spellName && description) {
+      const newSpell = {
+        id,
+        spellName,
+        description,
+      };
+      characterFilter.spells.push(newSpell);
+      // character.spells = [...cjaracter.spells, {id,spellName, description}]
+      return 'Hechizo agregado correctamente';
+    }
   },
 
   showSpells: function (name) {
     // Devuelve todos los hechizos de un personaje en particular
     // Si no encuentra al personaje que matchee con el nombre recibido por parámetros
     // devuelve un arreglo vacío
+    let characterFilter = characters.find((element) => element.name === name);
+
+    if (!characterFilter) {
+      return [];
+    } else {
+      characterFilter = characterFilter.spells.map((element) => element);
+      return characterFilter;
+    }
   },
 
   addWand: function (name, wood, core, length) {
@@ -66,11 +122,42 @@ module.exports = {
     // "Ya existe una varita para este personaje"
     // caso contrario debe agregar a la propiedad wand del personaje un objeto de la siguiente forma
     // {wood: wood, core: core, length: length}
+    let filterCharacter = characters.find((element) => element.name === name);
+
+    if (!filterCharacter) {
+      return [];
+    }
+    if (filterCharacter.wand.length > 1) {
+      return `Ya existe una varxita para este personaje`;
+    }
+
+    filterCharacter.wand = {
+      wood,
+      core,
+      length,
+    };
+
+    return 'varxita agregada correctamente';
   },
 
   showWand: function (name) {
     // Devuelve la varita de un personaje en particular
     // Si no encuentra al personaje que matchee con el nombre recibido por parámetros devuelve un arreglo vacío
     // Si el personaje en cuestión no tiene varita devuelve el string "el personaje no tiene varita"
+    const filterCharacter = characters.find((element) => element.name === name);
+
+    if (!filterCharacter) {
+      return [];
+    }
+    // if (!filterCharacter.wand.length) {
+    //   return 'el personaje no tiene varxita';
+    // }
+    if (JSON.stringify(filterCharacter.wand) === '{}') {
+      //filterCharacter.wand.length)
+      return 'el personaje no tiene varxita';
+    }
+    // Para convertir de vuelta a objeto:
+    // JSON.parse(objetoEnJson)
+    return filterCharacter.wand;
   },
 };
